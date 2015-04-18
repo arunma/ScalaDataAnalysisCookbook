@@ -3,6 +3,7 @@ import breeze.linalg.SparseVector
 import breeze.linalg._
 import breeze.numerics._
 
+
 object VectorWorksheet {
     
   //Dense and Sparse Vector with init values
@@ -10,8 +11,7 @@ object VectorWorksheet {
   val sparse=SparseVector(0.0, 1.0, 0.0, 2.0, 0.0)//> sparse  : breeze.linalg.SparseVector[Double] = SparseVector((0,0.0), (1,1.0)
                                                   //| , (2,0.0), (3,2.0), (4,0.0))
                                                   
-                             
-	//DenseVector with Zeroes
+  //DenseVector with Zeroes
 	val denseZeros=DenseVector.zeros[Double](5)
                                                   //> denseZeros  : breeze.linalg.DenseVector[Double] = DenseVector(0.0, 0.0, 0.0,
                                                   //|  0.0, 0.0)
@@ -28,25 +28,33 @@ object VectorWorksheet {
 	val evenNosTill20=DenseVector.range(0, 20, 2)
                                                   //> evenNosTill20  : breeze.linalg.DenseVector[Int] = DenseVector(0, 2, 4, 6, 8,
                                                   //|  10, 12, 14, 16, 18)
-                                                  
+
+	val allNosTill10=DenseVector.range(0, 10) //> allNosTill10  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 2, 3, 4, 
+                                                  //| 5, 6, 7, 8, 9)
 	//Fill
 	val denseJust2s=DenseVector.fill(10, 2)   //> denseJust2s  : breeze.linalg.DenseVector[Int] = DenseVector(2, 2, 2, 2, 2, 2
                                                   //| , 2, 2, 2, 2)
   
   //Slice
-  val fourThroughSevenIndexVector= evenNosTill20.slice(4, 7, 1)
+  
+  val fourThroughSevenIndexVector= allNosTill10.slice(4, 7)
                                                   //> fourThroughSevenIndexVector  : breeze.linalg.DenseVector[Int] = DenseVector(
-                                                  //| 8, 10, 12)
+                                                  //| 4, 5, 6)
+  val twoThroughNineSkip2IndexVector= allNosTill10.slice(2, 9, 2)
+                                                  //> twoThroughNineSkip2IndexVector  : breeze.linalg.DenseVector[Int] = DenseVect
+                                                  //| or(2, 4, 6)
   //Creating from Scala Vector
   val vectFromArray=DenseVector(collection.immutable.Vector(1,2,3,4))
-                                                  //> vectFromArray  : breeze.linalg.DenseVector[scala.collection.immutable.Vector
-                                                  //| [Int]] = DenseVector(Vector(1, 2, 3, 4))
+                                                  //> vectFromArray  : breeze.linalg.DenseVector[scala.collection.immutable.Vecto
+                                                  //| r[Int]] = DenseVector(Vector(1, 2, 3, 4))
   
   //Vector Arithmetic
   
   //Dot product
-	val dotVector=evenNosTill20.dot(denseJust2s)
-                                                  //> dotVector  : Int = 180
+  val justFive2s=DenseVector.fill(5, 2)           //> justFive2s  : breeze.linalg.DenseVector[Int] = DenseVector(2, 2, 2, 2, 2)
+  val zeroThrough4=DenseVector.range(0, 5, 1)     //> zeroThrough4  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 2, 3, 4)
+                                                  //| 
+	val dotVector=zeroThrough4.dot(justFive2s)//> dotVector  : Int = 20
 	
 	//Addition
 	val additionVector=evenNosTill20 + denseJust2s
@@ -58,10 +66,16 @@ object VectorWorksheet {
                                                   //| 6, 8, 10, 12, 14, 16, 18, 20)
 	//Concatenate a Vector
 	
-	val concatVector=DenseVector.vertcat(evenNosTill20, denseJust2s)
-                                                  //> concatVector  : breeze.linalg.DenseVector[Int] = DenseVector(0, 2, 4, 6, 8,
-                                                  //|  10, 12, 14, 16, 18, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
-                       
+	val concatVector=DenseVector.vertcat(zeroThrough4, justFive2s)
+                                                  //> concatVector  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 2, 3, 4,
+                                                  //|  2, 2, 2, 2, 2)
+
+	val concatVector1=DenseVector.horzcat(zeroThrough4, justFive2s)
+                                                  //> concatVector1  : breeze.linalg.DenseMatrix[Int] = 0  2  
+                                                  //| 1  2  
+                                                  //| 2  2  
+                                                  //| 3  2  
+                                                  //| 4  2  
 	//Other operations - Needs import of breeze.linalg._
 	
 	//Max
@@ -77,4 +91,28 @@ object VectorWorksheet {
                                                   //| , 0.6931471805599453, 1.3862943611198906, 1.791759469228055, 2.079441541679
                                                   //| 8357, 2.302585092994046, 2.4849066497880004, 2.6390573296152584, 2.77258872
                                                   //| 2239781, 2.8903717578961645)
+                            
+
+	
+	import breeze.stats._
+	
+	//Convert Vector of type Int to Vector of type Double
+	val evenNosTill20Double=convert(evenNosTill20, Double)
+                                                  //> evenNosTill20Double  : breeze.linalg.DenseVector[Double] = DenseVector(0.0,
+                                                  //|  2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0)
+	//Calculate Mean and Variance.  Note that this needs a Vector of Double
+	meanAndVariance(evenNosTill20Double)      //> res0: breeze.stats.MeanAndVariance = MeanAndVariance(9.0,36.666666666666664
+                                                  //| ,10)
+	
+	
+	meanAndVariance(convert(evenNosTill20, Double))
+                                                  //> res1: breeze.stats.MeanAndVariance = MeanAndVariance(9.0,36.666666666666664
+                                                  //| ,10)
+	   
+	//Calculate Mean
+  mean(evenNosTill20Double)                       //> res2: Double = 9.0
+  
+  //Calculate Standard Deviation
+  stddev(evenNosTill20Double)                     //> res3: Double = 6.0553007081949835
+
 }

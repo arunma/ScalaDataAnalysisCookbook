@@ -7,4 +7,4 @@ lazy val root = project.in(file("."))
 
 lazy val chapter1breezeready = project.in( file("chapter1-breeze-gettingready"))
 
-scalaVersion := "2.11.3"
+scalaVersion := "2.10.4"

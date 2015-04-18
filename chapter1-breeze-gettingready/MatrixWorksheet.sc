@@ -1,6 +1,7 @@
 import breeze.linalg.DenseMatrix
 import breeze.linalg._
 import breeze.numerics._
+import breeze.stats._
 
 
 object MatrixWorksheet {
@@ -38,23 +39,28 @@ object MatrixWorksheet {
                                                   //| 0.0  3.0  6.0  9.0   12.0  
                                                   //| 0.0  4.0  8.0  12.0  16.0  
 	
+	//Linearly spaced Vector
+	val spaceVector=breeze.linalg.linspace(2, 10, 5)
+                                                  //> spaceVector  : breeze.linalg.DenseVector[Double] = DenseVector(2.0, 4.0, 6.0
+                                                  //| , 8.0, 10.0)
+	
 	//Identity matrix
 	val identityMatrix=DenseMatrix.eye[Int](3)//> identityMatrix  : breeze.linalg.DenseMatrix[Int] = 1  0  0  
                                                   //| 0  1  0  
                                                   //| 0  0  1  
                                                   
 	//Fill
-	val randomMatrix=DenseMatrix.rand(4, 4)   //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = 0.09762565779429777   0.
-                                                  //| 01089176285376725  0.2660579009292807   0.19428193961985674  
-                                                  //| 0.9662568115400412    0.718377391997945    0.8230367668470933   0.3957540854
-                                                  //| 393169   
-                                                  //| 0.9080090988364429    0.7697780247035393   0.49887760321635066  0.2672201910
-                                                  //| 5654415  
-                                                  //| 3.326843165250004E-4  0.447925644082819    0.8195838733418965   0.7682752255
-                                                  //| 172411   
+	val randomMatrix=DenseMatrix.rand(4, 4)   //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = 0.14163307869754793  0.5
+                                                  //| 176781656991645   0.8305000748557907    0.7950115771005357   
+                                                  //| 0.6014368838589164   0.15382027069903015  0.40695483997582604   0.3698871102
+                                                  //| 2312115  
+                                                  //| 0.5085383250539783   0.5321984351172919   0.024557404766776703  0.8157394099
+                                                  //| 63264    
+                                                  //| 0.663374969842732    0.6383926469698742   0.7433916189831493    0.5106795767
+                                                  //| 626973   
   
   //Creating from Scala Vector
-  val vectFromArray=new DenseMatrix(2,2,Array(2,2,2,2))
+  val vectFromArray=new DenseMatrix(2,2,Array(2,2,2,2,4,5,6))
                                                   //> vectFromArray  : breeze.linalg.DenseMatrix[Int] = 2  2  
                                                   //| 2  2  
   
@@ -105,5 +111,28 @@ object MatrixWorksheet {
                                                   //| .6931471805599453  1.0986122886681098  
                                                   //| 2.3978952727983707  2.4849066497880004  2.5649493574615367  
                                                   //| 3.044522437723423   3.091042453358316   3.1354942159291497  
+                                                  
+     
+  //Convert Matrix of type Int to Matrix of type Double
+  val simpleMatrixAsDouble=convert(simpleMatrix, Double)
+                                                  //> simpleMatrixAsDouble  : breeze.linalg.DenseMatrix[Double] = 1.0   2.0   3.0
+                                                  //|    
+                                                  //| 11.0  12.0  13.0  
+                                                  //| 21.0  22.0  23.0  
+  
+  //Calculate Mean and Variance.  Note that this needs a Vector of Double
+ 	meanAndVariance(simpleMatrixAsDouble)     //> res0: breeze.stats.MeanAndVariance = MeanAndVariance(12.0,75.75,9)
+ 	
+ 	//One go
+ 	meanAndVariance(convert(simpleMatrix, Double))
+                                                  //> res1: breeze.stats.MeanAndVariance = MeanAndVariance(12.0,75.75,9)
+	 
+	 //Mean of the matrix
+  mean(simpleMatrixAsDouble)                      //> res2: Double = 12.0
+  
+  //Standard Deviation
+  stddev(simpleMatrixAsDouble)                    //> res3: Double = 8.703447592764606
+                                                  
+  
 
 }

@@ -2,7 +2,7 @@ organization := "com.packt"
 
 name := "chapter1-breeze"
 
-scalaVersion := "2.11.3"
+scalaVersion := "2.10.4"
 
 libraryDependencies  ++= Seq(
   "org.scalanlp" %% "breeze" % "0.11.2",
