@@ -21,7 +21,7 @@ object DataFrameCSV extends App{
   val sqlContext=new SQLContext(sc)
   
   //Now, lets load our pipe-separated file
-  //Student is of type org.apache.spark.sql.DataFrame
+  //students is of type org.apache.spark.sql.DataFrame
   val students=sqlContext.csvFile(filePath="StudentData.csv", useHeader=true, delimiter='|')
   
   //Print the schema of this input
