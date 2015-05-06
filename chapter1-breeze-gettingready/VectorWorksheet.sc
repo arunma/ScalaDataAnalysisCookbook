@@ -61,9 +61,25 @@ object VectorWorksheet {
                                                   //> additionVector  : breeze.linalg.DenseVector[Int] = DenseVector(2, 4, 6, 8, 
                                                   //| 10, 12, 14, 16, 18, 20)
                                                   
-	//in place addition of values
-	val inPlaceValueAddition=evenNosTill20 :+2//> inPlaceValueAddition  : breeze.linalg.DenseVector[Int] = DenseVector(2, 4, 
+	//Scalar addition
+	val inPlaceValueAddition=evenNosTill20 +2 //> inPlaceValueAddition  : breeze.linalg.DenseVector[Int] = DenseVector(2, 4, 
                                                   //| 6, 8, 10, 12, 14, 16, 18, 20)
+  
+  //Scalar subtraction
+	val inPlaceValueSubtraction=evenNosTill20 -2
+                                                  //> inPlaceValueSubtraction  : breeze.linalg.DenseVector[Int] = DenseVector(-2,
+                                                  //|  0, 2, 4, 6, 8, 10, 12, 14, 16)
+	
+	 
+  //Scalar multiplication
+	val inPlaceValueMultiplication=evenNosTill20 *2
+                                                  //> inPlaceValueMultiplication  : breeze.linalg.DenseVector[Int] = DenseVector(
+                                                  //| 0, 4, 8, 12, 16, 20, 24, 28, 32, 36)
+  //Scalar division
+	val inPlaceValueDivision=evenNosTill20 /2 //> inPlaceValueDivision  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 
+                                                  //| 2, 3, 4, 5, 6, 7, 8, 9)
+	
+	
 	//Concatenate a Vector
 	
 	val concatVector=DenseVector.vertcat(zeroThrough4, justFive2s)
@@ -115,4 +131,20 @@ object VectorWorksheet {
   //Calculate Standard Deviation
   stddev(evenNosTill20Double)                     //> res3: Double = 6.0553007081949835
 
+	
+	                                               
+	//ERROR cases
+	val fiveLength=DenseVector(1,2,3,4,5)     //> fiveLength  : breeze.linalg.DenseVector[Int] = DenseVector(1, 2, 3, 4, 5)
+  
+  val tenLength=DenseVector.fill(10, 20)          //> tenLength  : breeze.linalg.DenseVector[Int] = DenseVector(20, 20, 20, 20, 2
+                                                  //| 0, 20, 20, 20, 20, 20)
+  
+  fiveLength+tenLength                            //> res4: breeze.linalg.DenseVector[Int] = DenseVector(21, 22, 23, 24, 25)
+  
+  DenseVector.vertcat(fiveLength, tenLength)      //> res5: breeze.linalg.DenseVector[Int] = DenseVector(1, 2, 3, 4, 5, 20, 20, 2
+                                                  //| 0, 20, 20, 20, 20, 20, 20, 20)
+  
+   //DenseVector.horzcat(fiveLength, tenLength)
+	
+	
 }

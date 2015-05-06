@@ -2,6 +2,7 @@ import breeze.linalg.DenseMatrix
 import breeze.linalg._
 import breeze.numerics._
 import breeze.stats._
+import breeze.stats.distributions._
 
 
 object MatrixWorksheet {
@@ -50,14 +51,15 @@ object MatrixWorksheet {
                                                   //| 0  0  1  
                                                   
 	//Fill
-	val randomMatrix=DenseMatrix.rand(4, 4)   //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = 0.14163307869754793  0.5
-                                                  //| 176781656991645   0.8305000748557907    0.7950115771005357   
-                                                  //| 0.6014368838589164   0.15382027069903015  0.40695483997582604   0.3698871102
-                                                  //| 2312115  
-                                                  //| 0.5085383250539783   0.5321984351172919   0.024557404766776703  0.8157394099
-                                                  //| 63264    
-                                                  //| 0.663374969842732    0.6383926469698742   0.7433916189831493    0.5106795767
-                                                  //| 626973   
+	val randomMatrix=DenseMatrix.rand(4, 4, Gaussian.distribution(0,5.0))
+                                                  //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = -1.549516696975734   3.6
+                                                  //| 28900236479087    -0.12066061512259539  0.9510778211777988   
+                                                  //| -2.6478211481748968  -0.6758785217239858  -0.7530887337457499   2.8039893944
+                                                  //| 165666   
+                                                  //| -0.9619370483066306  -0.6832527540981242  4.016893440285645     0.3352569099
+                                                  //| 7698165  
+                                                  //| 0.9712624295427421   3.1174181415734803   0.7294633670936055    1.7668681928
+                                                  //| 29894    
   
   //Creating from Scala Vector
   val vectFromArray=new DenseMatrix(2,2,Array(2,2,2,2,4,5,6))
@@ -67,16 +69,23 @@ object MatrixWorksheet {
   //Matrix Arithmetic
   
   //Matrix element-wise multiplication
-	val dotMatrix=identityMatrix :* simpleMatrix
-                                                  //> dotMatrix  : breeze.linalg.DenseMatrix[Int] = 1  0   0   
+	val elementWiseMulti=identityMatrix :* simpleMatrix
+                                                  //> elementWiseMulti  : breeze.linalg.DenseMatrix[Int] = 1  0   0   
                                                   //| 0  12  0   
                                                   //| 0  0   23  
 	
 	//Addition
-	val additionMatrix=identityMatrix :+ simpleMatrix
+	val additionMatrix=identityMatrix + simpleMatrix
                                                   //> additionMatrix  : breeze.linalg.DenseMatrix[Int] = 2   2   3   
                                                   //| 11  13  13  
                                                   //| 21  22  24  
+                                                  
+  
+  //Dot product
+	val dotProduct=simpleMatrix * identityMatrix
+                                                  //> dotProduct  : breeze.linalg.DenseMatrix[Int] = 1   2   3   
+                                                  //| 11  12  13  
+                                                  //| 21  22  23  
                                                   
 	//Concatenate a Matrix - Vertically
 	val vertConcatMatrix=DenseMatrix.vertcat(identityMatrix, simpleMatrix)
@@ -134,5 +143,13 @@ object MatrixWorksheet {
   stddev(simpleMatrixAsDouble)                    //> res3: Double = 8.703447592764606
                                                   
   
+  
+  //Transpose
+	val transposedMatrix=simpleMatrix.t       //> transposedMatrix  : breeze.linalg.DenseMatrix[Int] = 1  11  21  
+                                                  //| 2  12  22  
+                                                  //| 3  13  23  
 
+
+	
+	
 }
