@@ -54,5 +54,4 @@ object Random extends App{
   val poissonMatrix=DenseMatrix.rand(3, 3,poissonDist)
   println ("poissonMatrix \n"+poissonMatrix)
   
-  
 }

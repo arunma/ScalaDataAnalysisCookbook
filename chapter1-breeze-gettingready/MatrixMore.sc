@@ -79,4 +79,6 @@ object MatrixMore {
   //val horzConcatMatrix=DenseMatrix.horzcat(identityMatrix, simpleMatrix)
   
   
+  val doubleRange=DenseVector.rangeD(0, 5, 0.5)  
+  
 }

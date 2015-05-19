@@ -29,6 +29,8 @@ object VectorWorksheet {
                                                   //> evenNosTill20  : breeze.linalg.DenseVector[Int] = DenseVector(0, 2, 4, 6, 8,
                                                   //|  10, 12, 14, 16, 18)
 
+	val doubleRange=DenseVector.rangeD(0, 5, 0.5)
+	
 	val allNosTill10=DenseVector.range(0, 10) //> allNosTill10  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 2, 3, 4, 
                                                   //| 5, 6, 7, 8, 9)
 	//Fill

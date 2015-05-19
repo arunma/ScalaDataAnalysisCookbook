@@ -82,7 +82,7 @@ object MatrixWorksheet {
                                                   
   
   //Dot product
-	val dotProduct=simpleMatrix * identityMatrix
+	val simpleTimesIdentity=simpleMatrix * identityMatrix
                                                   //> dotProduct  : breeze.linalg.DenseMatrix[Int] = 1   2   3   
                                                   //| 11  12  13  
                                                   //| 21  22  23  
