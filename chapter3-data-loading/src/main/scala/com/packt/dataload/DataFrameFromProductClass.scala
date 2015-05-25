@@ -6,6 +6,7 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.rdd.RDD
 import scala.util.Try
 import FlattenUtils._
+import com.packt.dataload.model.Student
 
 
 object DataFrameFromProductClass extends App {

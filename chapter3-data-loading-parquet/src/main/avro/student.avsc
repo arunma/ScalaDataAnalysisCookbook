@@ -1,0 +1,10 @@
+{"namespace": "studentavro.avro",
+ "type": "record",
+ "name": "StudentAvro",
+ "fields": [
+     {"name": "id", "type": ["string", "null"]},
+     {"name": "name",  "type": ["string", "null"]},
+     {"name": "phone", "type": ["string", "null"]},
+     {"name": "email", "type": ["string", "null"]}
+ ]
+}
