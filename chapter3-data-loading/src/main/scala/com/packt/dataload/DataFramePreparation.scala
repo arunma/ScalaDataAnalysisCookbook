@@ -36,6 +36,7 @@ object DataFramePreparation extends App{
   //3. Print all distinct
   val distinctStudents=allStudents.distinct
   println ("distinct")
+  distinctStudents.foreach(println)
   println(distinctStudents.count())
   
   //4.Subtraction
@@ -46,7 +47,7 @@ object DataFramePreparation extends App{
   //Sort by Id - Treating it a number 
   val sortByIdRdd=allStudents.rdd.map(eachRow=>(Try(eachRow.getString(0).toInt).getOrElse(Int.MaxValue),eachRow)).sortByKey(true)
   println ("sorting")
-  sortByIdRdd.foreach(println)
+  sortByIdRdd.values.foreach(println)
   
   //Removes duplicates by id and holds on to the row with the longest name
   val idStudentPairs=allStudents.rdd.map(eachRow=>(eachRow.getString(0),eachRow))
@@ -54,6 +55,6 @@ object DataFramePreparation extends App{
   	if (row1.getString(1).length()>row2.getString(1).length()) row1 else row2
   )
 
-  longestNameRdd.foreach(println)
+  longestNameRdd.values.foreach(println)
   
 }
