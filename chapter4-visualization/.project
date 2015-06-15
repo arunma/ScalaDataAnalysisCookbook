@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>chapter4-breezevisualization</name>
+  <name>chapter4-visualization</name>
   <buildSpec>
     <buildCommand>
       <name>org.scala-ide.sdt.core.scalabuilder</name>

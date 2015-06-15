@@ -162,8 +162,8 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.iq80.snappy/snappy/jars/snappy-0.2.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.json/json/jars/json-20090211.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro-mapred/jars/avro-mapred-1.7.6-hadoop2.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro-ipc/jars/avro-ipc-1.7.6-tests.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro-ipc/jars/avro-ipc-1.7.6.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro-ipc/jars/avro-ipc-1.7.6-tests.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.spark-project.hive.shims/hive-shims-0.20/jars/hive-shims-0.20-0.13.1a.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.mortbay.jetty/jetty/jars/jetty-6.1.26.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.mortbay.jetty/servlet-api/jars/servlet-api-2.5-20081211.jar"/>
