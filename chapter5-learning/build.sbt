@@ -3,7 +3,6 @@ organization := "com.packt"
 name := "chapter4-learning"
 
 scalaVersion := "2.10.4"
-val breezeVersion = "0.11.2"
 val sparkVersion="1.3.1"
 
 libraryDependencies  ++= Seq(
@@ -16,3 +15,5 @@ libraryDependencies  ++= Seq(
   "edu.stanford.nlp" % "stanford-corenlp" % "3.4.1",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.4.1" classifier "models"
 )
+
+fork := true

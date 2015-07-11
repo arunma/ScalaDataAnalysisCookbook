@@ -24,6 +24,13 @@ import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.mllib.regression.GeneralizedLinearModel
 import org.apache.spark.mllib.regression.GeneralizedLinearAlgorithm
 import org.apache.spark.mllib.optimization.SquaredL2Updater
+import epic.preprocess.TreebankTokenizer
+import epic.preprocess.MLSentenceSegmenter
+import org.apache.spark.mllib.feature.IDF
+import org.apache.spark.mllib.linalg.Vector
+import org.apache.spark.mllib.feature.Normalizer
+import org.apache.spark.mllib.feature.IDFModel
+import org.apache.spark.ml.feature.Tokenizer
 
 object BinaryClassificationSpam extends App {
 
@@ -39,91 +46,70 @@ object BinaryClassificationSpam extends App {
     Document(words.head.trim(), words.tail.mkString(" "))
   })
 
-  //Use Scala NLP - Epic
-  /*docs.mapPartitions{ docIter=>
-
-    val segmenter=MLSentenceSegmenter.bundled().get
-    val tokenizer = new TreebankTokenizer()
-    
-    docIter.map{doc=>
-    	val sentences=segmenter.apply(doc.content)
-    	sentences.map(sentence=> tokenizer(sentence))
-    }
-  }*/
-
-  def corePipeline(): StanfordCoreNLP = {
-    val props = new Properties()
-    props.put("annotators", "tokenize, ssplit, pos, lemma")
-    new StanfordCoreNLP(props)
-  }
-
-  def lemmatize(nlp: StanfordCoreNLP, content: String): List[String] = {
-    //We are required to prepare the text as 'annotatable' before we annotate :-)
-    val document = new Annotation(content)
-
-    //Annotate
-    nlp.annotate(document)
-
-    //Extract all sentences
-    val sentences = document.get(classOf[SentencesAnnotation]).asScala
-
-    //Extract lemmas from sentences
-    val lemmas = sentences.flatMap { sentence =>
-      val tokens = sentence.get(classOf[TokensAnnotation]).asScala
-      tokens.map(token => token.getString(classOf[LemmaAnnotation]))
-
-    }
-
-    //Only lemmas with letters or digits will be considered. Also consider only those words which has a length of at least 2
-    lemmas.toList.filter(lemma => lemma.forall(_.isLetterOrDigit)).filter(_.length() > 1)
-
-  }
-
-  val labeledPointsRdd: RDD[LabeledPoint] = docs.mapPartitions { docIter =>
-    val corenlp = corePipeline()
-    val stopwords = Source.fromFile("stopwords.txt").getLines()
-    val hashingTf = new HashingTF(5000)
-
-    docIter.map { doc =>
-      val lemmas = lemmatize(corenlp, doc.content)
-      //remove all the stopwords from the lemma list
-      lemmas.filterNot(lemma => stopwords.contains(lemma))
-
-      //Generates a term frequency vector from the features
-      val features = hashingTf.transform(lemmas)
-
-      //example : List(until, jurong, point, crazy, available, only, in, bugi, great, world, la, buffet, Cine, there, get, amore, wat)
-      new LabeledPoint(
-        if (doc.label.equals("ham")) 0 else 1,
-        features)
-
-    }
-  }.cache()
 
   def getAlgorithm(algo: String, iterations: Int, stepSize: Double, regParam: Double) = algo match {
-    case "logsgd" => {
+    case "LOGSGD" => {
       val algo = new LogisticRegressionWithSGD()
       algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(regParam)
       algo
     }
-    case "logbfgs" => {
+    case "LOGBFGS" => {
       val algo = new LogisticRegressionWithLBFGS()
       algo.setIntercept(true).optimizer.setNumIterations(iterations).setRegParam(regParam)
       algo
     }
-    case "svm" => {
+    case "SVMSGD" => {
       val algo = new SVMWithSGD()
       algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(regParam)
       algo
     }
   }
 
-  //Split dataset
-  val spamPoints = labeledPointsRdd.filter(point => point.label == 1).randomSplit(Array(0.8, 0.2))
-  val hamPoints = labeledPointsRdd.filter(point => point.label == 0).randomSplit(Array(0.8, 0.2))
+  val labeledPointsWithTf=getLabeledPoints(docs, "STANFORD").cache()
+
+  /*labeledPointsWithTf.foreach(lp=>{
+    println (lp.label +" features : "+lp.features)
   
-  println ("Spam count:"+(spamPoints(0).count)+"::"+(spamPoints(1).count))
-  println ("Ham count:"+(hamPoints(0).count)+"::"+(hamPoints(1).count))
+  })*/
+
+  def withIdf(lPoints: RDD[LabeledPoint]): RDD[LabeledPoint] = {
+    val hashedFeatures = labeledPointsWithTf.map(lp => lp.features)
+    val idf: IDF = new IDF()
+    val idfModel: IDFModel = idf.fit(hashedFeatures)
+
+    val tfIdf: RDD[Vector] = idfModel.transform(hashedFeatures)
+    
+    val lpTfIdf= labeledPointsWithTf.zip(tfIdf).map {
+      case (originalLPoint, tfIdfVector) => {
+        new LabeledPoint(originalLPoint.label, tfIdfVector)
+      }
+    }
+    
+    lpTfIdf
+  }
+ 
+  
+  def withNormalization(lPoints: RDD[LabeledPoint]): RDD[LabeledPoint] = {
+    
+    val tfIdf: RDD[Vector] = labeledPointsWithTf.map(lp => lp.features)
+    
+    val normalizer = new Normalizer()
+    val lpTfIdfNormalized = labeledPointsWithTf.zip(tfIdf).map {
+      case (originalLPoint, tfIdfVector) => {
+        new LabeledPoint(originalLPoint.label, normalizer.transform(tfIdfVector))
+      }
+    }
+    lpTfIdfNormalized
+  }
+  
+  val lpTfIdf=withIdf(labeledPointsWithTf).cache()
+  
+  //Split dataset
+  val spamPoints = lpTfIdf.filter(point => point.label == 1).randomSplit(Array(0.8, 0.2))
+  val hamPoints = lpTfIdf.filter(point => point.label == 0).randomSplit(Array(0.8, 0.2))
+
+  println("Spam count:" + (spamPoints(0).count) + "::" + (spamPoints(1).count))
+  println("Ham count:" + (hamPoints(0).count) + "::" + (hamPoints(1).count))
 
   val trainingSpamSplit = spamPoints(0)
   val testSpamSplit = spamPoints(1)
@@ -134,17 +120,20 @@ object BinaryClassificationSpam extends App {
   val trainingSplit = trainingSpamSplit ++ trainingHamSplit
   val testSplit = testSpamSplit ++ testHamSplit
 
-  val logisticWithSGD = getAlgorithm("logsgd", 100, 1, 0.001)
-  val logisticWithBfgs = getAlgorithm("logbfgs", 100, 1, 0.001)
-  val svmWithSGD = getAlgorithm("svm", 100, 1, 0.001)
+  val logisticWithSGD = getAlgorithm("LOGSGD", 100, 1, 0.001)
+  val logisticWithBfgs = getAlgorithm("LOGBFGS", 100, 1, 0.001)
+  val svmWithSGD = getAlgorithm("SVMSGD", 100, 1, 0.001)
+
+  //val logisticWithSGDPredictsActuals=runClassification(logisticWithSGD, trainingSplit, testSplit)
+  //val logisticWithBfgsPredictsActuals = runClassification(logisticWithBfgs, trainingSplit, testSplit)
+  val svmWithSGDPredictsActuals=runClassification(svmWithSGD, trainingSplit, testSplit)
 
   //Calculate evaluation metrics
-  //calculateMetrics(runClassification(logisticWithSGD, trainingSplit, testSplit), "Logistic Regression with SGD")
-  //calculateMetrics(runClassification(logisticWithBfgs, trainingSplit, testSplit), "Logistic Regression with BFGS")
-  calculateMetrics(runClassification(svmWithSGD, trainingSplit, testSplit), "SVM with SGD")
-  
-  
-  def runClassification(algorithm: GeneralizedLinearAlgorithm[_ <: GeneralizedLinearModel], trainingData:RDD[LabeledPoint], testData:RDD[LabeledPoint]): RDD[(Double, Double)] = {
+  //calculateMetrics(logisticWithSGDPredictsActuals, "Logistic Regression with SGD")
+  //calculateMetrics(logisticWithBfgsPredictsActuals, "Logistic Regression with BFGS")
+  calculateMetrics(svmWithSGDPredictsActuals, "SVM with SGD")
+
+  def runClassification(algorithm: GeneralizedLinearAlgorithm[_ <: GeneralizedLinearModel], trainingData: RDD[LabeledPoint], testData: RDD[LabeledPoint]): RDD[(Double, Double)] = {
     val model = algorithm.run(trainingData)
     val predicted = model.predict(testSplit.map(point => point.features))
     val actuals = testData.map(point => point.label)
@@ -154,18 +143,94 @@ object BinaryClassificationSpam extends App {
 
   def calculateMetrics(predictsAndActuals: RDD[(Double, Double)], algorithm: String) {
 
-    val accuracy = 1.0*predictsAndActuals.filter(predActs => predActs._1 == predActs._2).count() / predictsAndActuals.count()
+    val accuracy = 1.0 * predictsAndActuals.filter(predActs => predActs._1 == predActs._2).count() / predictsAndActuals.count()
     val binMetrics = new BinaryClassificationMetrics(predictsAndActuals)
     println(s"************** Printing metrics for $algorithm ***************")
     println(s"Area under ROC ${binMetrics.areaUnderROC}")
-    //println(s"Accuracy $accuracy")
-    //binMetrics.fMeasureByThreshold.foreach(thresholdF1 => println(s"Threshold and F1s ${thresholdF1._1} :::: ${thresholdF1._2}"))
-    
+    println(s"Accuracy $accuracy")
+
     val metrics = new MulticlassMetrics(predictsAndActuals)
     println(s"Precision : ${metrics.precision}")
     println(s"Confusion Matrix \n${metrics.confusionMatrix}")
     println(s"************** ending metrics for $algorithm *****************")
-    
   }
 
+  def getLabeledPoints(docs: RDD[Document], library: String): RDD[LabeledPoint] = library match {
+
+    case "EPIC" => {
+
+      //Use Scala NLP - Epic
+      val labeledPointsUsingEpicRdd: RDD[LabeledPoint] = docs.mapPartitions { docIter =>
+
+        val segmenter = MLSentenceSegmenter.bundled().get
+        val tokenizer = new TreebankTokenizer()
+        val hashingTf = new HashingTF(5000)
+
+        docIter.map { doc =>
+          val sentences = segmenter.apply(doc.content)
+          val features = sentences.flatMap(sentence => tokenizer(sentence))
+
+          //consider only features that are letters or digits and cut off all words that are less than 2 characters
+          features.toList.filter(token => token.forall(_.isLetterOrDigit)).filter(_.length() > 1)
+
+          new LabeledPoint(if (doc.label.equals("ham")) 0 else 1, hashingTf.transform(features))
+        }
+      }.cache()
+
+      labeledPointsUsingEpicRdd
+
+    }
+
+    case "STANFORD" => {
+      def corePipeline(): StanfordCoreNLP = {
+        val props = new Properties()
+        props.put("annotators", "tokenize, ssplit, pos, lemma")
+        new StanfordCoreNLP(props)
+      }
+
+      def lemmatize(nlp: StanfordCoreNLP, content: String): List[String] = {
+        //We are required to prepare the text as 'annotatable' before we annotate :-)
+        val document = new Annotation(content)
+        //Annotate
+        nlp.annotate(document)
+        //Extract all sentences
+        val sentences = document.get(classOf[SentencesAnnotation]).asScala
+
+        //Extract lemmas from sentences
+        val lemmas = sentences.flatMap { sentence =>
+          val tokens = sentence.get(classOf[TokensAnnotation]).asScala
+          tokens.map(token => token.getString(classOf[LemmaAnnotation]))
+
+        }
+        //Only lemmas with letters or digits will be considered. Also consider only those words which has a length of at least 2
+        lemmas.toList.filter(lemma => lemma.forall(_.isLetterOrDigit)).filter(_.length() > 1)
+      }
+
+      val labeledPointsUsingStanfordNLPRdd: RDD[LabeledPoint] = docs.mapPartitions { docIter =>
+        val corenlp = corePipeline()
+        val stopwords = Source.fromFile("stopwords.txt").getLines()
+        val hashingTf = new HashingTF(5000)
+
+        docIter.map { doc =>
+          val lemmas = lemmatize(corenlp, doc.content)
+          //remove all the stopwords from the lemma list
+          lemmas.filterNot(lemma => stopwords.contains(lemma))
+
+          //Generates a term frequency vector from the features
+          val features = hashingTf.transform(lemmas)
+
+          //example : List(until, jurong, point, crazy, available, only, in, bugi, great, world, la, buffet, Cine, there, get, amore, wat)
+          new LabeledPoint(
+            if (doc.label.equals("ham")) 0 else 1,
+            features)
+
+        }
+      }.cache()
+
+      labeledPointsUsingStanfordNLPRdd
+    }
+
+  }
+  
 }
+  

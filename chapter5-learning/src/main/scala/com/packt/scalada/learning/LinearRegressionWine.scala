@@ -28,6 +28,7 @@ object LinearRegressionWine extends App {
   //Summary stats
   val featureVector = rdd.map(row => Vectors.dense(row.take(11).map(str => str.toDouble)))
   val stats = Statistics.colStats(featureVector)
+  print (s"Max : ${stats.max}, Min : ${stats.min}, and Mean : ${stats.mean}")
 
   val dataPoints = rdd.map(row => new LabeledPoint(row.last.toDouble, Vectors.dense(row.take(11).map(str => str.toDouble)))).cache()
 
