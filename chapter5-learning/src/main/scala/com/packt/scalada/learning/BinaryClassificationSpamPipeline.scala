@@ -19,7 +19,7 @@ import org.apache.spark.mllib.evaluation.MulticlassMetrics
 
 object BinaryClassificationSpamPipeline extends App {
 
-  val conf = new SparkConf().setAppName("binaryClassificationSpamPipeline").setMaster("local[2]")
+  val conf = new SparkConf().setAppName("BinaryClassificationSpamPipeline").setMaster("local[2]")
   val sc = new SparkContext(conf)
   val sqlContext = new SQLContext(sc)
 

@@ -19,7 +19,7 @@ import org.apache.spark.mllib.regression.GeneralizedLinearModel
 
 object LinearRegressionWine extends App {
 
-  val conf = new SparkConf().setAppName("linearRegressionWine").setMaster("local[2]")
+  val conf = new SparkConf().setAppName("LinearRegressionWine").setMaster("local[2]")
   val sc = new SparkContext(conf)
   val sqlContext = new SQLContext(sc)
 

@@ -34,7 +34,7 @@ import org.apache.spark.ml.feature.Tokenizer
 
 object BinaryClassificationSpam extends App {
 
-  val conf = new SparkConf().setAppName("binaryClassificationSpam").setMaster("local[2]")
+  val conf = new SparkConf().setAppName("BinaryClassificationSpam").setMaster("local[2]")
   val sc = new SparkContext(conf)
   val sqlContext = new SQLContext(sc)
 
@@ -46,6 +46,39 @@ object BinaryClassificationSpam extends App {
     Document(words.head.trim(), words.tail.mkString(" "))
   })
 
+  
+  val labeledPointsWithTf=getLabeledPoints(docs, "STANFORD")
+   val lpTfIdf=withIdf(labeledPointsWithTf).cache()
+  
+  //Split dataset
+  val spamPoints = lpTfIdf.filter(point => point.label == 1).randomSplit(Array(0.8, 0.2))
+  val hamPoints = lpTfIdf.filter(point => point.label == 0).randomSplit(Array(0.8, 0.2))
+
+  println("Spam count:" + (spamPoints(0).count) + "::" + (spamPoints(1).count))
+  println("Ham count:" + (hamPoints(0).count) + "::" + (hamPoints(1).count))
+
+  val trainingSpamSplit = spamPoints(0)
+  val testSpamSplit = spamPoints(1)
+
+  val trainingHamSplit = hamPoints(0)
+  val testHamSplit = hamPoints(1)
+
+  val trainingSplit = trainingSpamSplit ++ trainingHamSplit
+  val testSplit = testSpamSplit ++ testHamSplit
+
+  val logisticWithSGD = getAlgorithm("LOGSGD", 100, 1, 0.001)
+  val logisticWithBfgs = getAlgorithm("LOGBFGS", 100, 1, 0.001)
+  val svmWithSGD = getAlgorithm("SVMSGD", 100, 1, 0.001)
+
+  //val logisticWithSGDPredictsActuals=runClassification(logisticWithSGD, trainingSplit, testSplit)
+  val logisticWithBfgsPredictsActuals = runClassification(logisticWithBfgs, trainingSplit, testSplit)
+  //val svmWithSGDPredictsActuals=runClassification(svmWithSGD, trainingSplit, testSplit)
+
+  //Calculate evaluation metrics
+  //calculateMetrics(logisticWithSGDPredictsActuals, "Logistic Regression with SGD")
+  calculateMetrics(logisticWithBfgsPredictsActuals, "Logistic Regression with BFGS")
+  //calculateMetrics(svmWithSGDPredictsActuals, "SVM with SGD")
+  
 
   def getAlgorithm(algo: String, iterations: Int, stepSize: Double, regParam: Double) = algo match {
     case "LOGSGD" => {
@@ -65,7 +98,6 @@ object BinaryClassificationSpam extends App {
     }
   }
 
-  val labeledPointsWithTf=getLabeledPoints(docs, "STANFORD").cache()
 
   /*labeledPointsWithTf.foreach(lp=>{
     println (lp.label +" features : "+lp.features)
@@ -102,40 +134,11 @@ object BinaryClassificationSpam extends App {
     lpTfIdfNormalized
   }
   
-  val lpTfIdf=withIdf(labeledPointsWithTf).cache()
-  
-  //Split dataset
-  val spamPoints = lpTfIdf.filter(point => point.label == 1).randomSplit(Array(0.8, 0.2))
-  val hamPoints = lpTfIdf.filter(point => point.label == 0).randomSplit(Array(0.8, 0.2))
-
-  println("Spam count:" + (spamPoints(0).count) + "::" + (spamPoints(1).count))
-  println("Ham count:" + (hamPoints(0).count) + "::" + (hamPoints(1).count))
-
-  val trainingSpamSplit = spamPoints(0)
-  val testSpamSplit = spamPoints(1)
-
-  val trainingHamSplit = hamPoints(0)
-  val testHamSplit = hamPoints(1)
-
-  val trainingSplit = trainingSpamSplit ++ trainingHamSplit
-  val testSplit = testSpamSplit ++ testHamSplit
-
-  val logisticWithSGD = getAlgorithm("LOGSGD", 100, 1, 0.001)
-  val logisticWithBfgs = getAlgorithm("LOGBFGS", 100, 1, 0.001)
-  val svmWithSGD = getAlgorithm("SVMSGD", 100, 1, 0.001)
-
-  //val logisticWithSGDPredictsActuals=runClassification(logisticWithSGD, trainingSplit, testSplit)
-  //val logisticWithBfgsPredictsActuals = runClassification(logisticWithBfgs, trainingSplit, testSplit)
-  val svmWithSGDPredictsActuals=runClassification(svmWithSGD, trainingSplit, testSplit)
-
-  //Calculate evaluation metrics
-  //calculateMetrics(logisticWithSGDPredictsActuals, "Logistic Regression with SGD")
-  //calculateMetrics(logisticWithBfgsPredictsActuals, "Logistic Regression with BFGS")
-  calculateMetrics(svmWithSGDPredictsActuals, "SVM with SGD")
+ 
 
   def runClassification(algorithm: GeneralizedLinearAlgorithm[_ <: GeneralizedLinearModel], trainingData: RDD[LabeledPoint], testData: RDD[LabeledPoint]): RDD[(Double, Double)] = {
     val model = algorithm.run(trainingData)
-    val predicted = model.predict(testSplit.map(point => point.features))
+    val predicted = model.predict(testData.map(point => point.features))
     val actuals = testData.map(point => point.label)
     val predictsAndActuals: RDD[(Double, Double)] = predicted.zip(actuals)
     predictsAndActuals
@@ -147,9 +150,12 @@ object BinaryClassificationSpam extends App {
     val binMetrics = new BinaryClassificationMetrics(predictsAndActuals)
     println(s"************** Printing metrics for $algorithm ***************")
     println(s"Area under ROC ${binMetrics.areaUnderROC}")
-    println(s"Accuracy $accuracy")
-
+    //println(s"Accuracy $accuracy")
+    
     val metrics = new MulticlassMetrics(predictsAndActuals)
+    val f1=metrics.fMeasure
+    println(s"F1 $f1")
+    
     println(s"Precision : ${metrics.precision}")
     println(s"Confusion Matrix \n${metrics.confusionMatrix}")
     println(s"************** ending metrics for $algorithm *****************")
