@@ -9,3 +9,5 @@ The samples in this project were written with JDK 1.7, Scala 2.10.4 and SBT .13.
 	3.	Data Loading and Preparation - Spark DataFrames
 	4.	Data Visualization with Zeppelin and Bokeh Scala
 	5.  Learning from Data - Spark MLLib (Linear Regression, Classification, Clustering and PCA)
+	6.  Scaling up - Deploying Spark on Standalone cluster, EC2, Mesos and YARN
+	7.  Going further - Streaming from Twitter, Kafka, Streaming Logistic Regression and Twitter CC analysis using GraphX     
