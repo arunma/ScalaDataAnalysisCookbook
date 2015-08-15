@@ -4,7 +4,7 @@ name := "chapter4-visualization"
 
 scalaVersion := "2.10.4"
 val breezeVersion = "0.11.2"
-val sparkVersion="1.3.1"
+val sparkVersion="1.4.1"
 
 libraryDependencies  ++= Seq(
   "org.scalanlp" %% "breeze" % breezeVersion,

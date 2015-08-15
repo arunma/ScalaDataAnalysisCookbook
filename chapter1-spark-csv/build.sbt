@@ -4,7 +4,7 @@ name := "chapter1-spark-csv"
 
 scalaVersion := "2.10.4"
 
-val sparkVersion="1.3.0"
+val sparkVersion="1.4.1"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion,

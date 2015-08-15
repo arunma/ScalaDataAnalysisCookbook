@@ -10,6 +10,7 @@ lazy val root = project.in(file("."))
   .aggregate(chapter4visualization)
   .aggregate(chapter5learning)
   .aggregate(chapter6scalingup)
+  .aggregate(chapter7goingfurther)
 
 lazy val chapter1breezeready = project.in( file("chapter1-breeze-gettingready"))
 lazy val chapter1sparkcsv = project.in( file("chapter1-spark-csv"))
@@ -18,5 +19,6 @@ lazy val chapter3dataloadparquet = project.in( file("chapter3-data-loading-parqu
 lazy val chapter4visualization = project.in( file("chapter4-visualization"))
 lazy val chapter5learning = project.in( file("chapter5-learning"))
 lazy val chapter6scalingup = project.in( file("chapter6-scalingup"))
+lazy val chapter7goingfurther = project.in( file("chapter7-goingfurther"))
 
 scalaVersion := "2.10.4"
