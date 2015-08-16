@@ -70,7 +70,7 @@ object KafkaStreamProducerFromES {
   def publishToKafka(labeledPointRdd: RDD[LabeledContent]) {
     labeledPointRdd.foreachPartition { iterator =>
 
-      val properties = Map[String, Object](ProducerConfig.BOOTSTRAP_SERVERS_CONFIG -> "localhost:9092", "serializer.class" -> "com.scalada.goingfurther.KryoSerializer").asJava
+      val properties = Map[String, Object](ProducerConfig.BOOTSTRAP_SERVERS_CONFIG -> "localhost:9092", "serializer.class" -> "kafka.serializer.DefaultEncoder").asJava
       val producer = new KafkaProducer[String, Array[Byte]](properties, new StringSerializer, new ByteArraySerializer)
 
       iterator.foreach { lContent =>
