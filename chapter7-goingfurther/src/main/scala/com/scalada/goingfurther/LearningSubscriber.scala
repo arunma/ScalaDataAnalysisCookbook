@@ -61,7 +61,7 @@ object LearningSubscriber {
   def trainModelFromKafka(streamingContext: StreamingContext): (Broadcast[HashingTF], StreamingLogisticRegressionWithSGD) = {
     //Subscribe to Kafka stream
     val topics = Set("twtopic")
-    val kafkaParams = Map[String, String]("metadata.broker.list" -> "localhost:9092", "serializer.class" -> "com.scalada.goingfurther.KryoSerializer")
+    val kafkaParams = Map[String, String]("metadata.broker.list" -> "localhost:9092", "serializer.class" -> "kafka.serializer.DefaultEncoder")
 
     /* Regular ZooKeeper method
      * val topicMap = Map("twtopic"->1)

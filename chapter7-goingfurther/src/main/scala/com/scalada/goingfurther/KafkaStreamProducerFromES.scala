@@ -1,7 +1,6 @@
 package com.scalada.goingfurther
 
 import scala.collection.JavaConverters.mapAsJavaMapConverter
-
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
@@ -15,8 +14,10 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SQLContext
 import org.elasticsearch.hadoop.cfg.ConfigurationOptions
 import org.elasticsearch.spark.sql.sqlContextFunctions
-
 import com.twitter.chill.ScalaKryoInstantiator
+import kafka.serializer.Decoder
+import kafka.serializer.Encoder
+import kafka.utils.VerifiableProperties
 
 /**
  * Reads from ElasticSearch and publishes to Kafka
