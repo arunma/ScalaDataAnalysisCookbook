@@ -26,21 +26,21 @@ object LinearRegressionWine extends App {
   val rdd = sc.textFile("winequality-red.csv").map(line => line.split(";"))
 
   //Summary stats
-  val featureVector = rdd.map(row => Vectors.dense(row.take(11).map(str => str.toDouble)))
+  val featureVector = rdd.map(row => Vectors.dense(row.take(row.length-1).map(str => str.toDouble)))
   val stats = Statistics.colStats(featureVector)
-  print (s"Max : ${stats.max}, Min : ${stats.min}, and Mean : ${stats.mean}")
+  print(s"Max : ${stats.max}, Min : ${stats.min}, and Mean : ${stats.mean} and Variance : ${stats.variance}")
 
-  val dataPoints = rdd.map(row => new LabeledPoint(row.last.toDouble, Vectors.dense(row.take(11).map(str => str.toDouble)))).cache()
+  val dataPoints = rdd.map(row => new LabeledPoint(row.last.toDouble, Vectors.dense(row.take(row.length-1).map(str => str.toDouble)))).cache()
 
   //split dataset
-  val splits = dataPoints.randomSplit(Array(0.8, 0.2))
-  val trainingSplit = splits(0)
-  val testSplit = splits(1)
+  val dataSplit = dataPoints.randomSplit(Array(0.8, 0.2))
+  val trainingSet = dataSplit(0)
+  val testSet = dataSplit(1)
 
   //Let's scale the points. 
-  val scaler = new StandardScaler(withMean = true, withStd = true).fit(trainingSplit.map(dp => dp.features))
-  val scaledTrainingSplit = trainingSplit.map(dp => new LabeledPoint(dp.label, scaler.transform(dp.features)))
-  val scaledTestSplit = testSplit.map(dp => new LabeledPoint(dp.label, scaler.transform(dp.features)))
+  val scaler = new StandardScaler(withMean = true, withStd = true).fit(trainingSet.map(dp => dp.features))
+  val scaledTrainingSet = trainingSet.map(dp => new LabeledPoint(dp.label, scaler.transform(dp.features))).cache()
+  val scaledTestSet = testSet.map(dp => new LabeledPoint(dp.label, scaler.transform(dp.features))).cache()
 
   val iterations = 1000
   val stepSize = 1
@@ -64,26 +64,26 @@ object LinearRegressionWine extends App {
   def algorithm(algo: String, iterations: Int, stepSize: Double) = algo match {
     case "linear" => {
       val algo = new LinearRegressionWithSGD()
-      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setMiniBatchFraction(0.5)
+      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setMiniBatchFraction(0.05)
       algo
     }
     case "lasso" => {
       val algo = new LassoWithSGD()
-      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(0.001).setMiniBatchFraction(0.5)
+      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(0.001).setMiniBatchFraction(0.05)
       algo
     }
     case "ridge" => {
       val algo = new RidgeRegressionWithSGD()
-      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(0.001).setMiniBatchFraction(0.5)
+      algo.setIntercept(true).optimizer.setNumIterations(iterations).setStepSize(stepSize).setRegParam(0.001).setMiniBatchFraction(0.05)
       algo
     }
   }
 
   def runRegression(algorithm: GeneralizedLinearAlgorithm[_ <: GeneralizedLinearModel]):RDD[(Double,Double)] = {
-    val model = algorithm.run(scaledTrainingSplit) //Let's pass in the training split 
+    val model = algorithm.run(scaledTrainingSet) //Let's pass in the training split 
 
-    val predictions: RDD[Double] = model.predict(scaledTestSplit.map(point => point.features))
-    val actuals: RDD[Double] = scaledTestSplit.map(point => point.label)
+    val predictions: RDD[Double] = model.predict(scaledTestSet.map(point => point.features))
+    val actuals: RDD[Double] = scaledTestSet.map(point => point.label)
 
     //Let's go ahead and calculate the Residual Sum of squares
     val predictsAndActuals: RDD[(Double, Double)] = predictions.zip(actuals)
@@ -104,7 +104,7 @@ object LinearRegressionWine extends App {
         math.pow(act - meanPrice, 2)
     }.sum()
 
-    val meanSquaredError = sumSquaredErrors / scaledTestSplit.count
+    val meanSquaredError = sumSquaredErrors / scaledTestSet.count
 
     println(s"************** Printing metrics for $algorithm *****************")
 

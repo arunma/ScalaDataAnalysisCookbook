@@ -71,13 +71,11 @@ object LearningSubscriber {
 
     val hashingTf = new HashingTF(5000)
     val kafkaStream = KafkaUtils.createDirectStream[String, Array[Byte], StringDecoder, DefaultDecoder](streamingContext, kafkaParams, topics).repartition(2)
-    val trainingStream = kafkaStream.mapPartitions { iterator =>
-      iterator.map {
+    val trainingStream = kafkaStream.map {
         case (key, value) =>
           val labeledContent = KryoSerializer.deserialize(value).asInstanceOf[LabeledContent]
           val vector = hashingTf.transform(labeledContent.content)
           LabeledPoint(labeledContent.label, vector)
-      }
     }
 
     //Now that HashingTF is constructed, broadcast HashingTF to be used while prediction by workers
@@ -115,13 +113,13 @@ object LearningSubscriber {
     val hashingTf=broadcastTf.value
     
     //Unable to filter for English tweets alone with twitter4j 3.0.3 - filter (status=>status.getLang=="en")
-    val contentAndVectorizedContent=twitterStream.map { status =>
+    val contentAndFeatureVector=twitterStream.map { status =>
       val tokens=status.getText().toLowerCase().split(" ")
       val vector=hashingTf.transform(tokens)
       (status.getText(), vector)
     }
     
-    val contentAndPrediction=model.predictOnValues(contentAndVectorizedContent)
+    val contentAndPrediction=model.predictOnValues(contentAndFeatureVector)
     
     //Not the best way to store the results. Creates a whole lot of files
     contentAndPrediction.saveAsTextFiles("predictions", "txt")

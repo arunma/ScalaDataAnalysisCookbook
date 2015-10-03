@@ -20,25 +20,24 @@ object MatrixWorksheet {
                                                   //| (2,2) 23
                              
 	//DenseMatrix with Zeroes
-	val denseZeros=DenseMatrix.zeros[Double](5,5)
-                                                  //> denseZeros  : breeze.linalg.DenseMatrix[Double] = 0.0  0.0  0.0  0.0  0.0  
-                                                  //| 0.0  0.0  0.0  0.0  0.0  
-                                                  //| 0.0  0.0  0.0  0.0  0.0  
-                                                  //| 0.0  0.0  0.0  0.0  0.0  
-                                                  //| 0.0  0.0  0.0  0.0  0.0  
+	val denseZeros=DenseMatrix.zeros[Double](5,4)
+                                                  //> denseZeros  : breeze.linalg.DenseMatrix[Double] = 0.0  0.0  0.0  0.0  
+                                                  //| 0.0  0.0  0.0  0.0  
+                                                  //| 0.0  0.0  0.0  0.0  
+                                                  //| 0.0  0.0  0.0  0.0  
+                                                  //| 0.0  0.0  0.0  0.0  
 
 	//Sparse Matrix with Zeroes
-	val compressedSparseMatrix=CSCMatrix.zeros[Double](5,5)
-                                                  //> compressedSparseMatrix  : breeze.linalg.CSCMatrix[Double] = 5 x 5 CSCMatrix
+	val compressedSparseMatrix=CSCMatrix.zeros[Double](5,4)
+                                                  //> compressedSparseMatrix  : breeze.linalg.CSCMatrix[Double] = 5 x 4 CSCMatrix
 	            
 	//Tabulate
-	val denseTabulate=DenseMatrix.tabulate[Double](5,5)((firstIdx,secondIdx)=>firstIdx*secondIdx)
-                                                  //> denseTabulate  : breeze.linalg.DenseMatrix[Double] = 0.0  0.0  0.0  0.0   0.
-                                                  //| 0   
-                                                  //| 0.0  1.0  2.0  3.0   4.0   
-                                                  //| 0.0  2.0  4.0  6.0   8.0   
-                                                  //| 0.0  3.0  6.0  9.0   12.0  
-                                                  //| 0.0  4.0  8.0  12.0  16.0  
+	val denseTabulate=DenseMatrix.tabulate(5,4)((firstIdx,secondIdx)=>firstIdx*secondIdx)
+                                                  //> denseTabulate  : breeze.linalg.DenseMatrix[Int] = 0  0  0  0   
+                                                  //| 0  1  2  3   
+                                                  //| 0  2  4  6   
+                                                  //| 0  3  6  9   
+                                                  //| 0  4  8  12  
 	
 	//Linearly spaced Vector
 	val spaceVector=breeze.linalg.linspace(2, 10, 5)
@@ -52,102 +51,92 @@ object MatrixWorksheet {
                                                   
 	//Fill
 	val randomMatrix=DenseMatrix.rand(4, 4, Gaussian.distribution(0,5.0))
-                                                  //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = -1.549516696975734   3.6
-                                                  //| 28900236479087    -0.12066061512259539  0.9510778211777988   
-                                                  //| -2.6478211481748968  -0.6758785217239858  -0.7530887337457499   2.8039893944
-                                                  //| 165666   
-                                                  //| -0.9619370483066306  -0.6832527540981242  4.016893440285645     0.3352569099
-                                                  //| 7698165  
-                                                  //| 0.9712624295427421   3.1174181415734803   0.7294633670936055    1.7668681928
-                                                  //| 29894    
+                                                  //> randomMatrix  : breeze.linalg.DenseMatrix[Double] = 4.877125989887656     4.
+                                                  //| 744961513079461    -5.975433443984735   1.4965595529016518   
+                                                  //| 1.4220859446091827    -0.5629808813310618  3.9628481804424283   -0.789496116
+                                                  //| 1265082  
+                                                  //| 1.4431061334413189    -0.8635804900538949  1.7891718302968342   1.4044210064
+                                                  //| 570106   
+                                                  //| -0.38627531878763116  0.8376526017090755   -4.1572911233970355  -0.597863066
+                                                  //| 6858334  
   
   //Creating from Scala Vector
-  val vectFromArray=new DenseMatrix(2,2,Array(2,2,2,2,4,5,6))
-                                                  //> vectFromArray  : breeze.linalg.DenseMatrix[Int] = 2  2  
-                                                  //| 2  2  
+  val vectFromArray=new DenseMatrix(2,2,Array(2,3,4,5,6,7))
+                                                  //> vectFromArray  : breeze.linalg.DenseMatrix[Int] = 2  4  
+                                                  //| 3  5  
   
+  val vectFromArrayIobe=new DenseMatrix(2,2,Array(2,3,4))
+                                                  //> java.lang.ArrayIndexOutOfBoundsException: 3
+                                                  //| 	at breeze.linalg.DenseMatrix$mcI$sp.apply$mcI$sp(DenseMatrix.scala:87)
+                                                  //| 	at breeze.linalg.DenseMatrix$mcI$sp.apply(DenseMatrix.scala:82)
+                                                  //| 	at breeze.linalg.DenseMatrix$mcI$sp.apply(DenseMatrix.scala:53)
+                                                  //| 	at breeze.linalg.Matrix$$anonfun$colWidth$1$1.apply$mcII$sp(Matrix.scala
+                                                  //| :71)
+                                                  //| 	at breeze.linalg.Matrix$$anonfun$colWidth$1$1.apply(Matrix.scala:71)
+                                                  //| 	at breeze.linalg.Matrix$$anonfun$colWidth$1$1.apply(Matrix.scala:71)
+                                                  //| 	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike
+                                                  //| .scala:244)
+                                                  //| 	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike
+                                                  //| .scala:244)
+                                                  //| 	at scala.collection.immutable.Range.foreach(Range.scala:141)
+                                                  //| 	at scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+                                                  //| 
+                                                  //| 	at scala.collection.AbstractTraversable.map(Traversable.scala:105)
+                                                  //| 	at breeze.linalg.Matrix$class.colWidth$1(Matrix.scala:71)
+                                                  //| 	at breez
+                                                  //| Output exceeds cutoff limit.
+                                                  
   //Matrix Arithmetic
   
   //Matrix element-wise multiplication
 	val elementWiseMulti=identityMatrix :* simpleMatrix
-                                                  //> elementWiseMulti  : breeze.linalg.DenseMatrix[Int] = 1  0   0   
-                                                  //| 0  12  0   
-                                                  //| 0  0   23  
 	
 	//Addition
 	val additionMatrix=identityMatrix + simpleMatrix
-                                                  //> additionMatrix  : breeze.linalg.DenseMatrix[Int] = 2   2   3   
-                                                  //| 11  13  13  
-                                                  //| 21  22  24  
                                                   
   
   //Dot product
 	val simpleTimesIdentity=simpleMatrix * identityMatrix
-                                                  //> dotProduct  : breeze.linalg.DenseMatrix[Int] = 1   2   3   
-                                                  //| 11  12  13  
-                                                  //| 21  22  23  
                                                   
 	//Concatenate a Matrix - Vertically
 	val vertConcatMatrix=DenseMatrix.vertcat(identityMatrix, simpleMatrix)
-                                                  //> vertConcatMatrix  : breeze.linalg.DenseMatrix[Int] = 1   0   0   
-                                                  //| 0   1   0   
-                                                  //| 0   0   1   
-                                                  //| 1   2   3   
-                                                  //| 11  12  13  
-                                                  //| 21  22  23  
   val horzConcatMatrix=DenseMatrix.horzcat(identityMatrix, simpleMatrix)
-                                                  //> horzConcatMatrix  : breeze.linalg.DenseMatrix[Int] = 1  0  0  1   2   3   
-                                                  //| 0  1  0  11  12  13  
-                                                  //| 0  0  1  21  22  23  
   
   
 	//Other operations - Needs import of breeze.linalg._ and breeze.numerics._
 	
 	//Max
-	val intMaxOfMatrixVals=max (simpleMatrix) //> intMaxOfMatrixVals  : Int = 23
+	val intMaxOfMatrixVals=max (simpleMatrix)
   //Sum
-	val intSumOfMatrixVals=sum (simpleMatrix) //> intSumOfMatrixVals  : Int = 108
+	val intSumOfMatrixVals=sum (simpleMatrix)
 	
 	
 	
   //Sqrt
-	val sqrtOfMatrixVals= sqrt (simpleMatrix) //> sqrtOfMatrixVals  : breeze.linalg.DenseMatrix[Double] = 1.0               1
-                                                  //| .4142135623730951  1.7320508075688772  
-                                                  //| 3.3166247903554   3.4641016151377544  3.605551275463989   
-                                                  //| 4.58257569495584  4.69041575982343    4.795831523312719   
+	val sqrtOfMatrixVals= sqrt (simpleMatrix)
   //Log
-	val log2MatrixVals=log(simpleMatrix)      //> log2MatrixVals  : breeze.linalg.DenseMatrix[Double] = 0.0                 0
-                                                  //| .6931471805599453  1.0986122886681098  
-                                                  //| 2.3978952727983707  2.4849066497880004  2.5649493574615367  
-                                                  //| 3.044522437723423   3.091042453358316   3.1354942159291497  
+	val log2MatrixVals=log(simpleMatrix)
                                                   
      
   //Convert Matrix of type Int to Matrix of type Double
   val simpleMatrixAsDouble=convert(simpleMatrix, Double)
-                                                  //> simpleMatrixAsDouble  : breeze.linalg.DenseMatrix[Double] = 1.0   2.0   3.0
-                                                  //|    
-                                                  //| 11.0  12.0  13.0  
-                                                  //| 21.0  22.0  23.0  
   
   //Calculate Mean and Variance.  Note that this needs a Vector of Double
- 	meanAndVariance(simpleMatrixAsDouble)     //> res0: breeze.stats.MeanAndVariance = MeanAndVariance(12.0,75.75,9)
+ 	meanAndVariance(simpleMatrixAsDouble)
  	
  	//One go
  	meanAndVariance(convert(simpleMatrix, Double))
-                                                  //> res1: breeze.stats.MeanAndVariance = MeanAndVariance(12.0,75.75,9)
 	 
 	 //Mean of the matrix
-  mean(simpleMatrixAsDouble)                      //> res2: Double = 12.0
+  mean(simpleMatrixAsDouble)
   
   //Standard Deviation
-  stddev(simpleMatrixAsDouble)                    //> res3: Double = 8.703447592764606
+  stddev(simpleMatrixAsDouble)
                                                   
   
   
   //Transpose
-	val transposedMatrix=simpleMatrix.t       //> transposedMatrix  : breeze.linalg.DenseMatrix[Int] = 1  11  21  
-                                                  //| 2  12  22  
-                                                  //| 3  13  23  
+	val transposedMatrix=simpleMatrix.t
 
 
 	

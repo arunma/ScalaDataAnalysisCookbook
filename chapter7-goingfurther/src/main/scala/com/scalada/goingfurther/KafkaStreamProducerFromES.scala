@@ -53,17 +53,13 @@ object KafkaStreamProducerFromES {
 
   def convertToLabeledContentRdd(twStatusDf: DataFrame) = {
     //Convert the content alone to a (label, content) pair 
-    val labeledPointRdd = twStatusDf.mapPartitions { iterator =>
-      iterator.map { row =>
+    val labeledPointRdd = twStatusDf.map{row =>
         val content = row.getAs[String]("content").toLowerCase()
         val tokens = content.split(" ") //A very primitive space based tokenizer
         val labeledContent=if (content.contains("fashion")) LabeledContent(1, tokens)
         else LabeledContent(0, tokens)
         println (labeledContent.label, content)
-        
         labeledContent
-        
-      }
     }
     labeledPointRdd
   }

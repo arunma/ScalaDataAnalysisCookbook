@@ -50,10 +50,10 @@ object PCASpam extends App {
   val trainingHamSplit = hamPoints(0)
   val testHamSplit = hamPoints(1)
 
-  val trainingSplit = trainingSpamSplit ++ trainingHamSplit
+  val trainingData = trainingSpamSplit ++ trainingHamSplit
   val testSplit = testSpamSplit ++ testHamSplit
 
-  println ("Training split count : "+trainingSplit.count())
+  println ("Training split count : "+trainingData.count())
   println ("Test split count : "+testSplit.count())
 
   //Unscaled sample. Watch out. However, the actual dimension reduction is done on scaled data
@@ -71,7 +71,7 @@ object PCASpam extends App {
   }*/
 
 
-  val unlabeledTrainData = trainingSplit.map(lpoint => Vectors.dense(lpoint.features.toArray)).cache()
+  val unlabeledTrainData = trainingData.map(lpoint => Vectors.dense(lpoint.features.toArray)).cache()
   
   //Scale data - Does not support scaling of SparseVector.  
   val scaler = new StandardScaler(withMean = true, withStd = false).fit(unlabeledTrainData)
@@ -84,7 +84,7 @@ object PCASpam extends App {
   println ("Pcomp dimension  "+ pcomp.numRows +"::"+pcomp.numCols)
   
   val reducedTrainingData = trainMatrix.multiply(pcomp).rows.cache()
-  val reducedTrainingSplit = trainingSplit.zip(reducedTrainingData).map { case (labeled, reduced) => new LabeledPoint(labeled.label, reduced) }
+  val reducedTrainingSplit = trainingData.zip(reducedTrainingData).map { case (labeled, reduced) => new LabeledPoint(labeled.label, reduced) }
   
   val unlabeledTestData=testSplit.map(lpoint=>lpoint.features)
   val testMatrix = new RowMatrix(unlabeledTestData)

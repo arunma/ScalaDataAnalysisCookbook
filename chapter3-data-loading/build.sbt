@@ -13,8 +13,8 @@ libraryDependencies ++= Seq(
   "com.datastax.spark" %% "spark-cassandra-connector-java" % "1.2.0",
   "mysql" % "mysql-connector-java" % "5.1.34",
   "com.databricks" %% "spark-csv" % "1.0.3",
-  "org.json4s" % "json4s-core_2.10" % "3.2.11",
-  "org.json4s" % "json4s-jackson_2.10" % "3.2.11"
+  "org.json4s" % "json4s-core_2.10" % "3.2.10",
+  "org.json4s" % "json4s-jackson_2.10" % "3.2.10"
   
 )
 

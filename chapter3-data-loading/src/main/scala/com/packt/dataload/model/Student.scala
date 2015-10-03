@@ -75,7 +75,6 @@ class Student(school: String,
     case 31 => g2
     case 32 => g3
     case _ => throw new IndexOutOfBoundsException(n.toString())
-
   }
 
   override def productArity: Int = 33

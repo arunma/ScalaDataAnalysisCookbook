@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-mllib" % sparkVersion,
   "org.apache.spark" %% "spark-hive" % sparkVersion,
   "org.apache.avro" % "avro" % "1.7.7",
-  "com.twitter" % "parquet-avro" % "1.6.0",
+  "org.apache.parquet" % "parquet-avro" % "1.8.1",
   "com.twitter" %% "chill-avro" % "0.6.0"
 )
 
@@ -27,3 +27,5 @@ fork := true
 seq( sbtavro.SbtAvro.avroSettings : _*)
 
 (stringType in avroConfig) := "String"
+
+javaSource in sbtavro.SbtAvro.avroConfig <<= (sourceDirectory in Compile)(_ / "java")

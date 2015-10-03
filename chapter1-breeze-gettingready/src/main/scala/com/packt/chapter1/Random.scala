@@ -21,8 +21,8 @@ object Random extends App{
     
   //VECTORS
   //Uniform distribution, Creates the Vector with random values from 0 to 1
-  val uniformWithoutParam=DenseVector.rand(10)
-  println ("uniformWithoutParam \n"+uniformWithoutParam)
+  val uniformWithoutSize=DenseVector.rand(10)
+  println ("uniformWithoutParam \n"+uniformWithoutSize)
   
   //Creates a Vector of size 10 with uniformly distributed random values with low being 0 and high being 10
   val uniformVectInRange=DenseVector.rand(10, uniformDist)

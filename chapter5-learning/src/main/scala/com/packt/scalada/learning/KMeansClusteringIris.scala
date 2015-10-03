@@ -25,7 +25,8 @@ object KMeansClusteringIris extends App {
   //Summary statistics before scaling
   val stats = Statistics.colStats(data)
   println("Statistics before scaling")
-  print(s"Max : ${stats.max}, Min : ${stats.min}, and Mean : ${stats.mean}")
+  print(s"Max : ${stats.max}, Min : ${stats.min}, and Mean : ${stats.mean} and Variance : ${stats.variance}")
+  
 
   //Scale data
   val scaler = new StandardScaler(withMean = true, withStd = true).fit(data)
@@ -34,10 +35,10 @@ object KMeansClusteringIris extends App {
   //Summary statistics before scaling
   val statsAfterScaling = Statistics.colStats(scaledData)
   println("Statistics after scaling")
-  print(s"Max : ${statsAfterScaling.max}, Min : ${statsAfterScaling.min}, and Mean : ${statsAfterScaling.mean}")
+  print(s"Max : ${statsAfterScaling.max}, Min : ${statsAfterScaling.min}, and Mean : ${statsAfterScaling.mean} and Variance : ${statsAfterScaling.variance}")
 
   //Take a sample to come up with the number of clusters
-  val sampleData = scaledData.randomSplit(Array(0.8, 0.2))(1)
+  val sampleData = scaledData.sample(false, 0.2).cache()
 
   //Decide number of clusters
   val clusterCost = (1 to 7).map { noOfClusters =>
@@ -47,9 +48,9 @@ object KMeansClusteringIris extends App {
       .setMaxIterations(5)
       .setInitializationMode(KMeans.K_MEANS_PARALLEL) //KMeans||
 
-    val model = kmeans.run(sampleData)
+    val model = kmeans.run(scaledData)
 
-    (noOfClusters, model.computeCost(sampleData))
+    (noOfClusters, model.computeCost(scaledData))
 
   }
 

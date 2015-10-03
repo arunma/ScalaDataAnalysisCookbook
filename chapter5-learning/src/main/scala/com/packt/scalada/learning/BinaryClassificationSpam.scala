@@ -47,8 +47,8 @@ object BinaryClassificationSpam extends App {
   })
 
   
-  val labeledPointsWithTf=getLabeledPoints(docs, "STANFORD")
-   val lpTfIdf=withIdf(labeledPointsWithTf).cache()
+  val labeledPointsUsingStanfordNLPRdd=getLabeledPoints(docs, "STANFORD")
+  val lpTfIdf=withIdf(labeledPointsUsingStanfordNLPRdd).cache()
   
   //Split dataset
   val spamPoints = lpTfIdf.filter(point => point.label == 1).randomSplit(Array(0.8, 0.2))
@@ -105,13 +105,13 @@ object BinaryClassificationSpam extends App {
   })*/
 
   def withIdf(lPoints: RDD[LabeledPoint]): RDD[LabeledPoint] = {
-    val hashedFeatures = labeledPointsWithTf.map(lp => lp.features)
+    val hashedFeatures = lPoints.map(lp => lp.features)
     val idf: IDF = new IDF()
     val idfModel: IDFModel = idf.fit(hashedFeatures)
 
     val tfIdf: RDD[Vector] = idfModel.transform(hashedFeatures)
     
-    val lpTfIdf= labeledPointsWithTf.zip(tfIdf).map {
+    val lpTfIdf= lPoints.zip(tfIdf).map {
       case (originalLPoint, tfIdfVector) => {
         new LabeledPoint(originalLPoint.label, tfIdfVector)
       }
@@ -121,7 +121,7 @@ object BinaryClassificationSpam extends App {
   }
  
   
-  def withNormalization(lPoints: RDD[LabeledPoint]): RDD[LabeledPoint] = {
+  /*def withNormalization(lPoints: RDD[LabeledPoint]): RDD[LabeledPoint] = {
     
     val tfIdf: RDD[Vector] = labeledPointsWithTf.map(lp => lp.features)
     
@@ -132,7 +132,7 @@ object BinaryClassificationSpam extends App {
       }
     }
     lpTfIdfNormalized
-  }
+  }*/
   
  
 
@@ -174,12 +174,12 @@ object BinaryClassificationSpam extends App {
 
         docIter.map { doc =>
           val sentences = segmenter.apply(doc.content)
-          val features = sentences.flatMap(sentence => tokenizer(sentence))
+          val tokens = sentences.flatMap(sentence => tokenizer(sentence))
 
           //consider only features that are letters or digits and cut off all words that are less than 2 characters
-          features.toList.filter(token => token.forall(_.isLetterOrDigit)).filter(_.length() > 1)
+          val filteredTokens=tokens.toList.filter(token => token.forall(_.isLetterOrDigit)).filter(_.length() > 1)
 
-          new LabeledPoint(if (doc.label.equals("ham")) 0 else 1, hashingTf.transform(features))
+          new LabeledPoint(if (doc.label.equals("ham")) 0 else 1, hashingTf.transform(filteredTokens))
         }
       }.cache()
 

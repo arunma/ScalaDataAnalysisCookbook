@@ -22,11 +22,13 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/commons-digester/commons-digester/jars/commons-digester-1.8.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/commons-beanutils/commons-beanutils/jars/commons-beanutils-1.7.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/commons-beanutils/commons-beanutils-core/jars/commons-beanutils-core-1.8.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro/bundles/avro-1.7.7.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.google.protobuf/protobuf-java/bundles/protobuf-java-2.5.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.hadoop/hadoop-auth/jars/hadoop-auth-2.2.0.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.avro/avro/jars/avro-1.7.7.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/jars/jackson-core-asl-1.9.13.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/jars/jackson-mapper-asl-1.9.13.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.commons/commons-compress/jars/commons-compress-1.4.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.tukaani/xz/jars/xz-1.0.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.google.protobuf/protobuf-java/bundles/protobuf-java-2.5.0.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.hadoop/hadoop-auth/jars/hadoop-auth-2.2.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.hadoop/hadoop-hdfs/jars/hadoop-hdfs-2.2.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.mortbay.jetty/jetty-util/jars/jetty-util-6.1.26.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.hadoop/hadoop-mapreduce-client-app/jars/hadoop-mapreduce-client-app-2.2.0.jar"/>
@@ -67,10 +69,12 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.eclipse.jetty.orbit/javax.servlet/orbits/javax.servlet-3.0.0.v201112011016.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.commons/commons-lang3/jars/commons-lang3-3.3.2.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.commons/commons-math3/jars/commons-math3-3.4.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.10.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.slf4j/jul-to-slf4j/jars/jul-to-slf4j-1.7.10.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.slf4j/jcl-over-slf4j/jars/jcl-over-slf4j-1.7.10.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.7.10.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.ning/compress-lzf/bundles/compress-lzf-1.0.3.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.xerial.snappy/snappy-java/bundles/snappy-java-1.1.1.7.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.jpountz.lz4/lz4/jars/lz4-1.2.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.roaringbitmap/RoaringBitmap/bundles/RoaringBitmap-0.4.5.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/commons-net/commons-net/jars/commons-net-2.2.jar"/>
@@ -87,14 +91,13 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.thoughtworks.paranamer/paranamer/jars/paranamer-2.6.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.scala-lang/scalap/jars/scalap-2.10.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.fasterxml.jackson.core/jackson-databind/bundles/jackson-databind-2.4.4.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.4.4.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.sun.jersey/jersey-core/bundles/jersey-core-1.9.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.mesos/mesos/jars/mesos-0.21.1-shaded-protobuf.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.clearspring.analytics/stream/jars/stream-2.7.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/io.dropwizard.metrics/metrics-core/bundles/metrics-core-3.1.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.7.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/io.dropwizard.metrics/metrics-jvm/bundles/metrics-jvm-3.1.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/io.dropwizard.metrics/metrics-json/bundles/metrics-json-3.1.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.fasterxml.jackson.core/jackson-core/bundles/jackson-core-2.4.4.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/io.dropwizard.metrics/metrics-graphite/bundles/metrics-graphite-3.1.0.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.fasterxml.jackson.module/jackson-module-scala_2.10/bundles/jackson-module-scala_2.10-2.4.4.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.fasterxml.jackson.core/jackson-annotations/bundles/jackson-annotations-2.4.4.jar"/>
@@ -105,20 +108,24 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/commons-io/commons-io/jars/commons-io-2.4.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.razorvine/pyrolite/jars/pyrolite-4.4.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.sf.py4j/py4j/jars/py4j-0.8.2.1.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.codehaus.jackson/jackson-core-asl/jars/jackson-core-asl-1.9.13.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.codehaus.jackson/jackson-mapper-asl/jars/jackson-mapper-asl-1.9.13.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.spark/spark-sql_2.10/jars/spark-sql_2.10-1.4.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.spark/spark-catalyst_2.10/jars/spark-catalyst_2.10-1.4.1.jar"/>
   <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_COMPILER_CONTAINER"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.scalamacros/quasiquotes_2.10/jars/quasiquotes_2.10-2.0.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-column/jars/parquet-column-1.6.0rc3.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-common/jars/parquet-common-1.6.0rc3.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-encoding/jars/parquet-encoding-1.6.0rc3.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-generator/jars/parquet-generator-1.6.0rc3.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-hadoop/jars/parquet-hadoop-1.6.0rc3.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-format/jars/parquet-format-2.2.0-rc1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-jackson/jars/parquet-jackson-1.6.0rc3.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.jodd/jodd-core/jars/jodd-core-3.6.3.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.spark/spark-mllib_2.10/jars/spark-mllib_2.10-1.4.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.spark/spark-streaming_2.10/jars/spark-streaming_2.10-1.4.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.spark/spark-graphx_2.10/jars/spark-graphx_2.10-1.4.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.github.fommil.netlib/core/jars/core-1.1.2.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.sourceforge.f2j/arpack_combined_all/jars/arpack_combined_all-0.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.sourceforge.f2j/arpack_combined_all/jars/arpack_combined_all-0.1-javadoc.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.sourceforge.f2j/arpack_combined_all/jars/arpack_combined_all-0.1.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.scalanlp/breeze_2.10/jars/breeze_2.10-0.11.2.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.scalanlp/breeze-macros_2.10/jars/breeze-macros_2.10-0.11.2.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/net.sf.opencsv/opencsv/jars/opencsv-2.3.jar"/>
@@ -176,14 +183,14 @@
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.mortbay.jetty/servlet-api/jars/servlet-api-2.5-20081211.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.spark-project.hive.shims/hive-shims-0.20S/jars/hive-shims-0.20S-0.13.1a.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.spark-project.hive.shims/hive-shims-0.23/jars/hive-shims-0.23-0.13.1a.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-avro/jars/parquet-avro-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-column/jars/parquet-column-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-common/jars/parquet-common-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-encoding/jars/parquet-encoding-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-generator/jars/parquet-generator-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-hadoop/jars/parquet-hadoop-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/parquet-jackson/jars/parquet-jackson-1.6.0.jar"/>
-  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.xerial.snappy/snappy-java/bundles/snappy-java-1.1.1.6.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-avro/jars/parquet-avro-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-column/jars/parquet-column-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-common/jars/parquet-common-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-encoding/jars/parquet-encoding-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-hadoop/jars/parquet-hadoop-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-format/jars/parquet-format-2.3.0-incubating.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/org.apache.parquet/parquet-jackson/jars/parquet-jackson-1.8.1.jar"/>
+  <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/it.unimi.dsi/fastutil/jars/fastutil-6.5.7.jar"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/chill-avro_2.10/jars/chill-avro_2.10-0.6.0.jar"/>
   <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
   <classpathentry kind="lib" path="/Users/Gabriel/.ivy2/cache/com.twitter/chill_2.10/jars/chill_2.10-0.6.0.jar"/>

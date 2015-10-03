@@ -16,23 +16,24 @@ object DataFrameFromJSON extends App {
   val sc = new SparkContext(conf)
   val sqlContext = new SQLContext(sc)
 
-  //val dFrame=sqlContext.jsonFile("/Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scala-dataanalysis-cookbook/chapter3-data-loading/profiles.json")
+  val dFrame=sqlContext.jsonFile("/Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scaladataanalysisCB-tower/chapter3-data-loading/profiles.json")
 
-  val dFrame = sqlContext.jsonFile("hdfs://localhost:9000/data/scalada/profiles.json")
+  //val dFrame = sqlContext.jsonFile("hdfs://localhost:9000/data/scalada/profiles.json")
   dFrame.printSchema()
   dFrame.show()
 
   //Using JSONRDD
-  val strRDD = sc.textFile("hdfs://localhost:9000/data/scalada/profiles.json")
-  val jsonRDD = sqlContext.jsonRDD(strRDD)
+  //val strRDD = sc.textFile("hdfs://localhost:9000/data/scalada/profiles.json")
+  val strRDD = sc.textFile("/Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scala-dataanalysis-cookbook/chapter3-data-loading/profiles.json")
+  val jsonDf = sqlContext.jsonRDD(strRDD)
 
-  jsonRDD.printSchema()
-  jsonRDD.show()
+  jsonDf.printSchema()
+  jsonDf.show()
 
   //Explicit Schema Definition
   val profilesSchema = StructType(
     Seq(
-      StructField("id", StringType, true),
+      StructField("_id", StringType, true),
       StructField("about", StringType, true),
       StructField("address", StringType, true),
       StructField("age", IntegerType, true),
@@ -46,12 +47,12 @@ object DataFrameFromJSON extends App {
       StructField("registered", TimestampType, true),
       StructField("tags", ArrayType(StringType), true)))
 
-  val jsonRDDWithSchema = sqlContext.jsonRDD(strRDD, profilesSchema)
+  val jsonDfWithSchema = sqlContext.jsonRDD(strRDD, profilesSchema)
 
-  jsonRDDWithSchema.printSchema() //Has timestamp
-  jsonRDDWithSchema.show()
+  jsonDfWithSchema.printSchema() //Has timestamp
+  jsonDfWithSchema.show()
 
-  jsonRDDWithSchema.registerTempTable("profilesTable")
+  jsonDfWithSchema.registerTempTable("profilesTable")
 
   //Filter based on timestamp
   val filterCount = sqlContext.sql("select * from profilesTable where registered> CAST('2014-08-26 00:00:00' AS TIMESTAMP)").count
@@ -65,6 +66,8 @@ object DataFrameFromJSON extends App {
   File("profileSchema.json").writeAll(profilesSchema.json)
 
   val loadedSchema = DataType.fromJson(Source.fromFile("profileSchema.json").mkString)
+  
+  println ("ProfileSchema == loadedSchema :"+(loadedSchema.json==profilesSchema.json))
   //Print loaded schema
   println(loadedSchema.prettyJson)
 

@@ -19,7 +19,9 @@ object ParquetCaseClassMain extends App{
   
   //Treat binary encoded values as Strings
   sqlContext.setConf("spark.sql.parquet.binaryAsString","true")
-  sqlContext.setConf("spark.sql.parquet.compression.codec", "snappy")
+  
+  //sqlContext.setConf("spark.sql.parquet.compression.codec", "snappy")
+  
   //sqlContext.setConf("spark.sql.parquet.compression.codec", "gzip")
   //sqlContext.setConf("spark.sql.parquet.compression.codec", "lzo")
   
@@ -42,12 +44,21 @@ object ParquetCaseClassMain extends App{
   
   
    //The CSV has a header row.  Zipping with index and skipping the first row
-  def convertCSVToStudents(filePath: String, sc: SparkContext): RDD[Student] = {
+  /*def convertCSVToStudents(filePath: String, sc: SparkContext): RDD[Student] = {
     val rddOfStudents: RDD[Student] = sc.textFile(filePath).zipWithIndex().filter(_._2>0).map(eachLineAndNum => {
       val data=eachLineAndNum._1.split("\\|")
       Student(data(0), data(1), data(2), data(3))
     })
     
+    rddOfStudents
+  }*/
+  
+  
+  def convertCSVToStudents(filePath: String, sc: SparkContext): RDD[Student] = {
+    val rddOfStudents: RDD[Student] =sc.textFile(filePath).flatMap(line => {
+      val data = line.split("\\|")
+      if (data(0) == "id") None else Some(Student(data(0), data(1), data(2), data(3)))
+    })
     rddOfStudents
   }
 

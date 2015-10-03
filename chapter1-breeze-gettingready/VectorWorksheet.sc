@@ -30,6 +30,8 @@ object VectorWorksheet {
                                                   //|  10, 12, 14, 16, 18)
 
 	val doubleRange=DenseVector.rangeD(0, 5, 0.5)
+                                                  //> doubleRange  : breeze.linalg.DenseVector[Double] = DenseVector(0.0, 0.5, 1.0
+                                                  //| , 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5)
 	
 	val allNosTill10=DenseVector.range(0, 10) //> allNosTill10  : breeze.linalg.DenseVector[Int] = DenseVector(0, 1, 2, 3, 4, 
                                                   //| 5, 6, 7, 8, 9)
@@ -115,7 +117,7 @@ object VectorWorksheet {
 	import breeze.stats._
 	
 	//Convert Vector of type Int to Vector of type Double
-	val evenNosTill20Double=convert(evenNosTill20, Double)
+	val evenNosTill20Double=breeze.linalg.convert(evenNosTill20, Double)
                                                   //> evenNosTill20Double  : breeze.linalg.DenseVector[Double] = DenseVector(0.0,
                                                   //|  2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0)
 	//Calculate Mean and Variance.  Note that this needs a Vector of Double

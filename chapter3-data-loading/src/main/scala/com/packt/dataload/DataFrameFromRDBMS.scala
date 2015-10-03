@@ -20,10 +20,18 @@ object DataFrameFromRDBMS extends App {
   val options = Map(
     "driver" -> config.getString("mysql.driver"),
     "url" -> config.getString("mysql.connection.url"),
-    "dbtable" -> "(select * from student) as student")
+    "dbtable" -> "(select * from student) as student",
+    "partitionColumn" -> "id",
+    "lowerBound" -> "1",
+    "upperBound" -> "100",
+  	"numPartitions"-> "2")
     
   val dFrame=sqlContext.load("jdbc", options)
   
+  dFrame.printSchema()
+  
   dFrame.show()
-
+  
+  
+  
 }

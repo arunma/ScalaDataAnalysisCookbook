@@ -16,6 +16,8 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
+import org.apache.spark.ml.feature.IDF
+import org.apache.spark.ml.feature.VectorAssembler
 
 object BinaryClassificationSpamPipeline extends App {
 
@@ -47,26 +49,31 @@ object BinaryClassificationSpamPipeline extends App {
   val trainingSplit = trainingSpamSplit ++ trainingHamSplit
   val testSplit = testSpamSplit ++ testHamSplit
 
-  //Convert documents to Dataframe because the cross validator needs a dataframe
   import sqlContext.implicits._
   val trainingDFrame=trainingSplit.toDF()
   val testDFrame=testSplit.toDF()
   
+  
   val tokenizer=new Tokenizer().setInputCol("content").setOutputCol("tokens")
-  val hashingTf=new HashingTF().setInputCol(tokenizer.getOutputCol).setOutputCol("features")
-  val logisticRegression=new LogisticRegression().setFeaturesCol(hashingTf.getOutputCol).setLabelCol("label").setMaxIter(10)
+  val hashingTf=new HashingTF().setInputCol(tokenizer.getOutputCol).setOutputCol("tf")
+  val idf = new IDF().setInputCol(hashingTf.getOutputCol).setOutputCol("tfidf")
+  val assembler = new VectorAssembler().setInputCols(Array("tfidf", "label")).setOutputCol("features")
+ 
+  val logisticRegression=new LogisticRegression().setFeaturesCol("features").setLabelCol("label").setMaxIter(10)
   
   
   val pipeline=new Pipeline()
-  pipeline.setStages(Array(tokenizer, hashingTf, logisticRegression))
+  pipeline.setStages(Array(tokenizer, hashingTf, idf, assembler,logisticRegression))
   val model=pipeline.fit(trainingDFrame)
   
   //No cross validation
-  val predictsAndActualsNoCV:RDD[(Double,Double)]=model.transform(testDFrame)
+  /*val predictsAndActualsNoCV:RDD[(Double,Double)]=model.transform(testDFrame)
       .select("content", "label", "probability", "prediction")
       .map {
       		case Row(content: String, label:Double, prob: Vector, prediction: Double) =>  (label,prediction)
-  		}.cache()
+  		}.cache()*/
+  
+  val predictsAndActualsNoCV:RDD[(Double,Double)]=model.transform(testDFrame).map(r => (r.getAs[Double]("label"), r.getAs[Double]("prediction"))).cache
   
   calculateMetrics(predictsAndActualsNoCV, "Without Cross validation")
   
@@ -87,12 +94,8 @@ object BinaryClassificationSpamPipeline extends App {
 
   val bestModel=crossValidator.fit(trainingDFrame)
   
-  val predictsAndActualsWithCV:RDD[(Double,Double)]=model.transform(testDFrame)
-      .select("content", "label", "probability", "prediction")
-      .map {
-      		case Row(text: String, label:Double, prob: Vector, prediction: Double) => (label,prediction)
-  		}.cache()
-
+  val predictsAndActualsWithCV:RDD[(Double,Double)]=bestModel.transform(testDFrame).map(r => (r.getAs[Double]("label"), r.getAs[Double]("prediction"))).cache
+  
   calculateMetrics(predictsAndActualsWithCV, "Cross validation")
 
 

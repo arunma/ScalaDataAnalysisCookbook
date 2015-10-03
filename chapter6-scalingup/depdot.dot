@@ -1,7 +1,170 @@
 [0m[[0minfo[0m] [0mLoading global plugins from /Users/Gabriel/.sbt/0.13/plugins[0m
-[0m[[33mwarn[0m] [0mMultiple resolvers having different access mechanism configured with same name 'sbt-plugin-releases'. To avoid conflict, Remove duplicate project resolvers (`resolvers`) or rename publishing resolver (`publishTo`).[0m
 [0m[[0minfo[0m] [0mLoading project definition from /Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scaladataanalysisCB-tower/chapter6-scalingup/project[0m
-[0m[[33mwarn[0m] [0mMultiple resolvers having different access mechanism configured with same name 'sbt-plugin-releases'. To avoid conflict, Remove duplicate project resolvers (`resolvers`) or rename publishing resolver (`publishTo`).[0m
+[0m[[0minfo[0m] [0mUpdating {file:/Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scaladataanalysisCB-tower/chapter6-scalingup/project/}chapter6-scalingup-build...[0m
+[0m[[0minfo[0m] [0mResolving org.scala-sbt#global-plugins;0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbteclipse#sbteclipse-plugin;2.5.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbteclipse#sbteclipse-core;2.5.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scalaz#scalaz-core_2.10;7.0.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scalaz#scalaz-effect_2.10;7.0.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbt#sbt-aspectj;0.9.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.aspectj#aspectjtools;1.7.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving net.virtual-void#sbt-dependency-graph;0.7.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.github.mdr#ascii-graphs_2.10;0.0.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.github.mpeltonen#sbt-idea;1.6.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving commons-io#commons-io;2.0.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbt#sbt-less;1.0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#less-node;1.6.0-1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#source-map;0.1.31-2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#amdefine;0.1.0-1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#mkdirp;0.3.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbt#sbt-js-engine;1.0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe#jse_2.10;1.0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-actor_2.10;2.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe#config;1.2.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-contrib_2.10;2.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-remote_2.10;2.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving io.netty#netty;3.8.0.Final ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.google.protobuf#protobuf-java;2.5.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.uncommons.maths#uncommons-maths;1.2.2a ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-cluster_2.10;2.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-persistence-experimental_2.10;2.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.iq80.leveldb#leveldb;0.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.iq80.leveldb#leveldb-api;0.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.google.guava#guava;12.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.google.code.findbugs#jsr305;1.3.9 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-all;1.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni;1.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.hawtjni#hawtjni-runtime;1.8 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-osx;1.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-linux32;1.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-linux64;1.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-win32;1.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.leveldbjni#leveldbjni-win64;1.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving io.apigee.trireme#trireme-core;0.7.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-api;1.7.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.mozilla#rhino;1.7R4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving io.apigee.trireme#trireme-node10src;0.7.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving io.spray#spray-json_2.10;1.2.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.parboiled#parboiled-scala_2.10;1.1.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.parboiled#parboiled-core;1.1.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-simple;1.7.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-api;1.7.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe#npm_2.10;1.0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#npm;1.3.26 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.webjars#webjars-locator;0.14 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.fasterxml.jackson.core#jackson-databind;2.3.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.fasterxml.jackson.core#jackson-annotations;2.3.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.fasterxml.jackson.core#jackson-core;2.3.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbt#sbt-web;1.0.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.typesafe.sbt#sbt-native-packager;1.0.0-RC1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.commons#commons-compress;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.tukaani#xz;1.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.vafer#jdeb;1.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving commons-io#commons-io;2.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.commons#commons-compress;1.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.tukaani#xz;1.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-core;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-model;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.plexus#plexus-utils;3.0.17 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-settings;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-settings-builder;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.plexus#plexus-interpolation;1.19 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.plexus#plexus-component-annotations;1.5.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.sonatype.plexus#plexus-sec-dispatcher;1.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.sonatype.plexus#plexus-cipher;1.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-repository-metadata;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-artifact;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-plugin-api;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.sisu#org.eclipse.sisu.plexus;0.0.0.M5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving javax.enterprise#cdi-api;1.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving javax.annotation#jsr250-api;1.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving javax.inject#javax.inject;1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.google.guava#guava;14.0.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.sonatype.sisu#sisu-guice;3.1.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving aopalliance#aopalliance;1.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.sisu#org.eclipse.sisu.inject;0.0.0.M5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.plexus#plexus-classworlds;2.5.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-model-builder;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.maven#maven-aether-provider;3.2.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.aether#aether-api;0.9.0.M2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.aether#aether-spi;0.9.0.M2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.aether#aether-util;0.9.0.M2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.aether#aether-impl;0.9.0.M2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.ant#ant;1.9.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.ant#ant-launcher;1.9.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.bouncycastle#bcpg-jdk15on;1.51 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.bouncycastle#bcprov-jdk15on;1.51 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.cavorite#sbt-avro;0.3.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.avro#avro;1.7.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-core-asl;1.9.13 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-mapper-asl;1.9.13 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.thoughtworks.paranamer#paranamer;2.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.xerial.snappy#snappy-java;1.0.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.avro#avro-compiler;1.7.5 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving commons-lang#commons-lang;2.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.velocity#velocity;1.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving commons-collections#commons-collections;3.2.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.13.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scalactic#scalactic_2.10;2.2.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-reflect;2.10.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#sbt;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#main;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#actions;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#classpath;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-compiler;2.10.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#launcher-interface;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#interface;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#io;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#control;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#completion;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#collections;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving jline#jline;2.11 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#api;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#compiler-integration;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#incremental-compiler;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#logging;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#process;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#relation;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#compile;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#persist;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-tools.sbinary#sbinary_2.10;0.4.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#classfile;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#compiler-ivy-integration;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#ivy;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#cross;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt.ivy#ivy;2.3.0-sbt-fccfbd44c9f64523b61398a0155784dcbaeae28f ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.jcraft#jsch;0.1.46 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.json4s#json4s-native_2.10;3.2.10 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.json4s#json4s-core_2.10;3.2.10 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.json4s#json4s-ast_2.10;3.2.10 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.thoughtworks.paranamer#paranamer;2.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scalap;2.10.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.spire-math#jawn-parser_2.10;0.6.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.spire-math#json4s-support_2.10;0.6.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#run;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#task-system;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#tasks;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#tracking;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#cache;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#testing;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#test-agent;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#test-interface;1.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#main-settings;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#apply-macro;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#command;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#logic;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#compiler-interface;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#precompiled-2_8_2;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#precompiled-2_9_2;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-sbt#precompiled-2_9_3;0.13.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#jline;2.10.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.jansi#jansi;1.4 ...[0m
+[0m[[0minfo[0m] [0mdownloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.13.0!sbt-assembly.jar (7124ms)[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar ...[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scalactic#scalactic_2.10;2.2.1!scalactic_2.10.jar(bundle) (2962ms)[0m
+[0m[[0minfo[0m] [0mDone updating.[0m
 [0m[[33mwarn[0m] [0mThere may be incompatibilities among your library dependencies.[0m
 [0m[[33mwarn[0m] [0mHere are some of the libraries that were evicted:[0m
 [0m[[33mwarn[0m] [0m	* com.eed3si9n:sbt-assembly:0.12.0 -> 0.13.0[0m
@@ -129,15 +292,7 @@
 M[2K[0m[[0minfo[0m] [0mResolving com.github.fommil.netlib#native_system;1.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.logging.log4j#log4j-core;2.0-beta8 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.logging.log4j#log4j-api;2.0-beta8 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving edu.stanford.nlp#stanford-corenlp;3.4.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving com.io7m.xom#xom;1.2.10 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving xalan#xalan;2.7.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving joda-time#joda-time;2.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving de.jollyday#jollyday;0.4.7 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving javax.xml.bind#jaxb-api;2.2.7 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving com.googlecode.efficient-java-matrix-library#ejml;0.23 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving javax.json#javax.json-api;1.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-core_2.10;1.3.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-core_2.10;1.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.twitter#chill_2.10;0.5.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.twitter#chill-java;0.5.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.esotericsoftware.kryo#kryo;2.21 ...[0m
@@ -163,7 +318,6 @@
 M[2K[0m[[0minfo[0m] [0mResolving commons-beanutils#commons-beanutils;1.7.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving commons-beanutils#commons-beanutils-core;1.8.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-core-asl;1.8.8 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-mapper-asl;1.8.8 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.avro#avro;1.7.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.thoughtworks.paranamer#paranamer;2.3 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.xerial.snappy#snappy-java;1.0.4.1 ...[0m
@@ -212,10 +366,12 @@
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn-server;2.2.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn-server;2.2.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.hadoop#hadoop-yarn;2.2.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-network-common_2.10;1.3.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving io.netty#netty-all;4.0.23.Final ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-launcher_2.10;1.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.spark-project.spark#unused;1.0.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-network-shuffle_2.10;1.3.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-network-common_2.10;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving io.netty#netty-all;4.0.23.Final ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-network-shuffle_2.10;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-unsafe_2.10;1.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving net.java.dev.jets3t#jets3t;0.7.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.curator#curator-recipes;2.4.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.curator#curator-framework;2.4.0 ...[0m
@@ -225,12 +381,12 @@
 M[2K[0m[[0minfo[0m] [0mResolving jline#jline;0.9.94 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.google.guava#guava;14.0.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.eclipse.jetty.orbit#javax.servlet;3.0.0.v201112011016 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.commons#commons-math3;3.1.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.commons#commons-math3;3.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#jul-to-slf4j;1.7.10 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#jcl-over-slf4j;1.7.10 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-log4j12;1.7.10 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving com.ning#compress-lzf;1.0.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.xerial.snappy#snappy-java;1.1.1.6 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.ning#compress-lzf;1.0.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.xerial.snappy#snappy-java;1.1.1.7 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving net.jpountz.lz4#lz4;1.2.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.roaringbitmap#RoaringBitmap;0.4.5 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving commons-net#commons-net;2.2 ...[0m
@@ -248,7 +404,8 @@
 M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scalap;2.10.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-compiler;2.10.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-reflect;2.10.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.mesos#mesos;0.21.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.sun.jersey#jersey-core;1.9 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.mesos#mesos;0.21.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.clearspring.analytics#stream;2.7.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving io.dropwizard.metrics#metrics-core;3.1.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving io.dropwizard.metrics#metrics-jvm;3.1.0 ...[0m
@@ -261,13 +418,13 @@
 M[2K[0m[[0minfo[0m] [0mResolving com.fasterxml.jackson.core#jackson-annotations;2.4.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.apache.ivy#ivy;2.4.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving oro#oro;2.0.8 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.tachyonproject#tachyon-client;0.5.0 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.tachyonproject#tachyon;0.5.0 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.tachyonproject#tachyon-client;0.6.4 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.tachyonproject#tachyon;0.6.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving commons-io#commons-io;2.4 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.spark-project#pyrolite;2.0.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving net.razorvine#pyrolite;4.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving net.sf.py4j#py4j;0.8.2.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-sql_2.10;1.3.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-catalyst_2.10;1.3.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-sql_2.10;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-catalyst_2.10;1.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-compiler;2.10.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scalamacros#quasiquotes_2.10;2.0.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving com.twitter#parquet-column;1.6.0rc3 ...[0m
@@ -280,16 +437,24 @@
 M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-mapper-asl;1.9.11 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.codehaus.jackson#jackson-core-asl;1.9.11 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.jodd#jodd-core;3.6.3 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-mllib_2.10;1.3.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-streaming_2.10;1.3.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-graphx_2.10;1.3.1 ...[0m
-M[2K[0m[[0minfo[0m] [0mResolving org.jblas#jblas;1.2.3 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-mllib_2.10;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-streaming_2.10;1.4.1 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.apache.spark#spark-graphx_2.10;1.4.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scalanlp#breeze_2.10;0.11.2 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scalanlp#breeze-macros_2.10;0.11.2 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.jpmml#pmml-model;1.1.15 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.jpmml#pmml-agent;1.1.15 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving org.jpmml#pmml-schema;1.1.15 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.sun.xml.bind#jaxb-impl;2.2.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.sun.xml.bind#jaxb-core;2.2.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving javax.xml.bind#jaxb-api;2.2.7 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.sun.istack#istack-commons-runtime;2.16 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving com.sun.xml.fastinfoset#FastInfoset;1.2.12 ...[0m
+M[2K[0m[[0minfo[0m] [0mResolving javax.xml.bind#jsr173_api;1.0 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving commons-net#commons-net;3.1 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.slf4j#slf4j-api;1.7.10 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.scala-lang#jline;2.10.4 ...[0m
 M[2K[0m[[0minfo[0m] [0mResolving org.fusesource.jansi#jansi;1.4 ...[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
 [0m[[0minfo[0m] [0mWrote dependency graph to '/Users/Gabriel/Dropbox/arun/ScalaDataAnalysis/Code/scaladataanalysisCB-tower/chapter6-scalingup/target/dependencies-compile.dot'[0m
-[0m[[32msuccess[0m] [0mTotal time: 34 s, completed Jul 17, 2015 4:29:13 PM[0m
+[0m[[32msuccess[0m] [0mTotal time: 30 s, completed Sep 26, 2015 10:13:42 PM[0m

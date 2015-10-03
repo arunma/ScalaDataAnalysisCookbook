@@ -41,14 +41,12 @@ object JSONPreprocesor extends App {
     name = compact(render(jsonValue \ "name"))
     dateAsString=compact(render(jsonValue \ "dob")).replace("\"","")
     date = new Timestamp(formatter.parseDateTime(dateAsString).getMillis())
-    tags = compact(render(jsonValue \ "tags"))
+    tags = render(jsonValue \ "tags").extract[List[String]].mkString(",")
   } yield JsonDateModel(name, date, tags)
 
   import sqlContext.implicits._
   val df=dateModelRDD.toDF()
-
   df.printSchema()
-  
-  df.show
+  df.show(df.count.toInt)
   
 }

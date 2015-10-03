@@ -43,8 +43,8 @@ object TwitterGraphX {
 
   def convertDataFrameToGraph(df: DataFrame):Graph[String,String]= {
 
-    val verticesRdd = df.flatMap { row =>
-      val hashTags = row.getAs[Buffer[String]]("hashTags")
+    val verticesRdd:RDD[(Long,String)] = df.flatMap { tweet =>
+      val hashTags = tweet.getAs[Buffer[String]]("hashTags")
       hashTags.map { tag =>
         val lowercaseTag = tag.toLowerCase()
         val tagHashCode=lowercaseTag.hashCode().toLong
@@ -53,7 +53,7 @@ object TwitterGraphX {
     }
     
     
-    val edgesRdd = df.flatMap { row =>
+    val edgesRdd:RDD[Edge[String]] = df.flatMap { row =>
       val hashTags = row.getAs[Buffer[String]]("hashTags")
       
       val urls = row.getAs[Buffer[String]]("urls")
@@ -86,7 +86,9 @@ object TwitterGraphX {
     //Get all the connected components
     val connectedComponents=graph.connectedComponents.cache()
     
-    val ccCounts=connectedComponents.vertices.map{case (componentId, vertexId) => vertexId}.countByValue
+    import scala.collection._
+    
+    val ccCounts:Map[VertexId, Long]=connectedComponents.vertices.map{case (_, vertexId) => vertexId}.countByValue
 
     //Get the top component Id and count
     val topComponent:(VertexId, Long)=ccCounts.toSeq.sortBy{case (componentId, count) => count}.reverse.head
@@ -97,13 +99,12 @@ object TwitterGraphX {
     }
     
     //Filter the vertices that belong to the top component alone
-    val topComponentRdd=hashtagComponentRdd.filter{ case (vertexId, (hashTag, componentId)) => (componentId==topComponent._1)}
-    
-    val hashTags=topComponentRdd.map{case (vertexId, (hashTag,componentId)) =>
-      hashTag
+    val topComponentHashTags=hashtagComponentRdd
+    				.filter{ case (vertexId, (hashTag, componentId)) => (componentId==topComponent._1)}
+    				.map{case (vertexId, (hashTag,componentId)) => hashTag
     }
     
-    hashTags
+    topComponentHashTags
     
   }
   

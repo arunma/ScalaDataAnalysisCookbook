@@ -26,7 +26,7 @@ object DataFramePreparation extends App{
 //  1. Combining two or more DataFrames
   val allStudents=students1.unionAll(students2)
   println ("union")
-  allStudents.foreach(println)
+  allStudents.show(allStudents.count().toInt)
   
   //2. intersection
   val intersection=students1.intersect(students2)
@@ -45,9 +45,9 @@ object DataFramePreparation extends App{
   subtraction.foreach(println)
 
   //Sort by Id - Treating it a number 
-  val sortByIdRdd=allStudents.rdd.map(eachRow=>(Try(eachRow.getString(0).toInt).getOrElse(Int.MaxValue),eachRow)).sortByKey(true)
+  val sortedCols=allStudents.selectExpr("cast(id as int) as id", "studentName", "phone", "email").sort("id")
   println ("sorting")
-  sortByIdRdd.values.foreach(println)
+  sortedCols.show(sortedCols.count.toInt)
   
   //Removes duplicates by id and holds on to the row with the longest name
   val idStudentPairs=allStudents.rdd.map(eachRow=>(eachRow.getString(0),eachRow))
@@ -56,5 +56,19 @@ object DataFramePreparation extends App{
   )
 
   longestNameRdd.values.foreach(println)
+  
+  
+    //Inner Join
+  val studentsJoin=students1.join(students2, students1("id")===students2("id"))
+  studentsJoin.show(studentsJoin.count.toInt)
+
+  //Left outer join
+  val studentsLeftOuterJoin=students1.join(students2, students1("id")===students2("id"), "left_outer")
+  studentsLeftOuterJoin.show(studentsLeftOuterJoin.count.toInt)
+  
+  //Right outer join
+  val studentsRightOuterJoin=students1.join(students2, students1("id")===students2("id"), "right_outer")
+  studentsRightOuterJoin.show(studentsRightOuterJoin.count.toInt)
+  
   
 }

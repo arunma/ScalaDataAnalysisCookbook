@@ -56,8 +56,9 @@ object DataFrameCSV extends App{
   //Records with No student names
   students.filter("studentName =''").show(7)
   
+  println ("student null")
   //Show all records whose student names are empty or null
-  students.filter("studentName ='' OR studentName = 'NULL'").show(7)
+  students.filter("studentName ='' OR studentName='NULL'").show(7)
   
   //Get all students whose name starts with the letter 'M'
   students.filter("SUBSTR(studentName,0,1) ='M'").show(7)
@@ -77,6 +78,9 @@ object DataFrameCSV extends App{
   
   //Order by a list of column names - without using SQL
   students.sort("studentName", "id").show(10)
+  
+  println ("Students and Id descending")
+  students.sort(students("studentName").desc, students("id").asc).show(10)
   
   
   //Now, let's save the modified dataframe with a new name
