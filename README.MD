@@ -1,4 +1,4 @@
-###Scala Data Analysis Cookbook
+### Scala Data Analysis Cookbook
 
 Samples for Packt Publishing's Scala Data Analysis Cookbook
 
